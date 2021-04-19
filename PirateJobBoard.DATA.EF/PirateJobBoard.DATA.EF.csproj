@@ -59,6 +59,7 @@
     <Compile Include="Assignment.cs">
       <DependentUpon>PirateJobBoardModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Metadata\PirateJobBoardMetadata.cs" />
     <Compile Include="OpenAssignment.cs">
       <DependentUpon>PirateJobBoardModel.tt</DependentUpon>
     </Compile>

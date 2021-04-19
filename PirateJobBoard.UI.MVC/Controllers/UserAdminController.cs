@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace PirateJobBoard.UI.MVC.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "PirateLord")]
     public class UsersAdminController : Controller
     {
         public UsersAdminController()

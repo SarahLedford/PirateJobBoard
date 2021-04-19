@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace PirateJobBoard.UI.MVC.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "PirateLord")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()

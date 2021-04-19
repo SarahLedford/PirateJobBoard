@@ -64,6 +64,23 @@ namespace PirateJobBoard.UI.MVC.Models
 
     public class RegisterViewModel
     {
+
+        [Required(ErrorMessage = "* First name is required")]
+        [Display(Name ="First Name")]
+        [StringLength(50, ErrorMessage ="* Must not exceed 50 characters")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "* Last name is required")]
+        [Display(Name = "Last Name")]
+        [StringLength(50, ErrorMessage = "* Must not exceed 50 characters")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Resume")]
+        public string ResumeFilename { get; set; }
+
+        [Display(Name ="Do you currently have scurvy?")]
+        public bool HasScurvy { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

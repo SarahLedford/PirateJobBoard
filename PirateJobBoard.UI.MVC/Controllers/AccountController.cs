@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using PirateJobBoard.DATA.EF;
+using System;
 
 namespace PirateJobBoard.UI.MVC.Controllers
 {
@@ -16,7 +18,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -145,7 +147,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase resume)
         {
             if (ModelState.IsValid)
             {
@@ -153,11 +155,47 @@ namespace PirateJobBoard.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    #region Custom User Details
+                    string resumeName = "";
+                    if (resume != null)
+                    {
+                        resumeName = resume.FileName;
+
+                        string ext = resumeName.Substring(resumeName.LastIndexOf('.'));
+                        string[] goodExts = { ".doc", ".docx", ".pdf", ".rtf", ".txt" };
+
+                        if (goodExts.Contains(ext.ToLower()))
+                        {
+                            resumeName = Guid.NewGuid() + ext;
+                            resume.SaveAs(Server.MapPath("~/Content/Resumes/" + resumeName));
+                        }
+                        else
+                        {
+                            resumeName = "";
+                        }
+                    }
+
+                    PirateDetail newPirateDetails = new PirateDetail();
+                    newPirateDetails.PirateID = user.Id;
+                    newPirateDetails.FirstName = model.FirstName;
+                    newPirateDetails.LastName = model.LastName;
+                    newPirateDetails.ResumeFilename = resumeName;//TODO: handle file upload
+                    newPirateDetails.HasScurvy = model.HasScurvy;
+
+
+
+                    PirateJobBoardEntities db = new PirateJobBoardEntities();
+                    db.PirateDetails.Add(newPirateDetails);
+                    db.SaveChanges();
+                    #endregion
+
+                    UserManager.AddToRole(user.Id, "Crewmate");
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    //ViewBag.Link = callbackUrl;
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

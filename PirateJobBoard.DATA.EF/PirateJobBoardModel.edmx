@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PirateJobBoardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OpenAssignmentID" Type="int" Nullable="false" />
+          <Property Name="PirateID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ApplicationDate" Type="date" Nullable="false" />
+          <Property Name="CaptainNotes" Type="varchar" MaxLength="2000" />
+          <Property Name="ApplicationStatus" Type="int" Nullable="false" />
+          <Property Name="ResumeFilename" Type="varchar" MaxLength="75" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApplicationStatus">
+          <Key>
+            <PropertyRef Name="ApplicationStatusID" />
+          </Key>
+          <Property Name="ApplicationStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StatusDescription" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Assignments">
+          <Key>
+            <PropertyRef Name="AssignmentID" />
+          </Key>
+          <Property Name="AssignmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssignmentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AssignmentDescription" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="OpenAssignments">
+          <Key>
+            <PropertyRef Name="OpenAssignmentID" />
+          </Key>
+          <Property Name="OpenAssignmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssignmentID" Type="int" Nullable="false" />
+          <Property Name="ShipID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PirateDetails">
+          <Key>
+            <PropertyRef Name="PirateID" />
+          </Key>
+          <Property Name="PirateID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ResumeFilename" Type="varchar" MaxLength="75" />
+          <Property Name="HasScurvy" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ships">
+          <Key>
+            <PropertyRef Name="ShipID" />
+          </Key>
+          <Property Name="ShipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShipName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="HomePort" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CaptainID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Applications_ApplicationStatus">
+          <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatus">
+              <PropertyRef Name="ApplicationStatusID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="ApplicationStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_OpenAssignments">
+          <End Role="OpenAssignments" Type="Self.OpenAssignments" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenAssignments">
+              <PropertyRef Name="OpenAssignmentID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="OpenAssignmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_PirateDetails">
+          <End Role="PirateDetails" Type="Self.PirateDetails" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PirateDetails">
+              <PropertyRef Name="PirateID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="PirateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenAssignments_Assignments">
+          <End Role="Assignments" Type="Self.Assignments" Multiplicity="1" />
+          <End Role="OpenAssignments" Type="Self.OpenAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignments">
+              <PropertyRef Name="AssignmentID" />
+            </Principal>
+            <Dependent Role="OpenAssignments">
+              <PropertyRef Name="AssignmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenAssignments_Ships">
+          <End Role="Ships" Type="Self.Ships" Multiplicity="1" />
+          <End Role="OpenAssignments" Type="Self.OpenAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ships">
+              <PropertyRef Name="ShipID" />
+            </Principal>
+            <Dependent Role="OpenAssignments">
+              <PropertyRef Name="ShipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ships_PirateDetails">
+          <End Role="PirateDetails" Type="Self.PirateDetails" Multiplicity="1" />
+          <End Role="Ships" Type="Self.Ships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PirateDetails">
+              <PropertyRef Name="PirateID" />
+            </Principal>
+            <Dependent Role="Ships">
+              <PropertyRef Name="CaptainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PirateJobBoardModelStoreContainer">
+          <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assignments" EntityType="Self.Assignments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OpenAssignments" EntityType="Self.OpenAssignments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PirateDetails" EntityType="Self.PirateDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ships" EntityType="Self.Ships" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Applications_ApplicationStatus" Association="Self.FK_Applications_ApplicationStatus">
+            <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_OpenAssignments" Association="Self.FK_Applications_OpenAssignments">
+            <End Role="OpenAssignments" EntitySet="OpenAssignments" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_PirateDetails" Association="Self.FK_Applications_PirateDetails">
+            <End Role="PirateDetails" EntitySet="PirateDetails" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenAssignments_Assignments" Association="Self.FK_OpenAssignments_Assignments">
+            <End Role="Assignments" EntitySet="Assignments" />
+            <End Role="OpenAssignments" EntitySet="OpenAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenAssignments_Ships" Association="Self.FK_OpenAssignments_Ships">
+            <End Role="Ships" EntitySet="Ships" />
+            <End Role="OpenAssignments" EntitySet="OpenAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ships_PirateDetails" Association="Self.FK_Ships_PirateDetails">
+            <End Role="PirateDetails" EntitySet="PirateDetails" />
+            <End Role="Ships" EntitySet="Ships" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PirateJobBoardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OpenAssignmentID" Type="Int32" Nullable="false" />
+          <Property Name="PirateID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApplicationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CaptainNotes" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="ApplicationStatus" Type="Int32" Nullable="false" />
+          <Property Name="ResumeFilename" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ApplicationStatu" Relationship="Self.FK_Applications_ApplicationStatus" FromRole="Applications" ToRole="ApplicationStatus" />
+          <NavigationProperty Name="OpenAssignment" Relationship="Self.FK_Applications_OpenAssignments" FromRole="Applications" ToRole="OpenAssignments" />
+          <NavigationProperty Name="PirateDetail" Relationship="Self.FK_Applications_PirateDetails" FromRole="Applications" ToRole="PirateDetails" />
+        </EntityType>
+        <EntityType Name="ApplicationStatus">
+          <Key>
+            <PropertyRef Name="ApplicationStatusID" />
+          </Key>
+          <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StatusDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_ApplicationStatus" FromRole="ApplicationStatus" ToRole="Applications" />
+        </EntityType>
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="AssignmentID" />
+          </Key>
+          <Property Name="AssignmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssignmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AssignmentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OpenAssignments" Relationship="Self.FK_OpenAssignments_Assignments" FromRole="Assignments" ToRole="OpenAssignments" />
+        </EntityType>
+        <EntityType Name="OpenAssignment">
+          <Key>
+            <PropertyRef Name="OpenAssignmentID" />
+          </Key>
+          <Property Name="OpenAssignmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssignmentID" Type="Int32" Nullable="false" />
+          <Property Name="ShipID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_OpenAssignments" FromRole="OpenAssignments" ToRole="Applications" />
+          <NavigationProperty Name="Assignment" Relationship="Self.FK_OpenAssignments_Assignments" FromRole="OpenAssignments" ToRole="Assignments" />
+          <NavigationProperty Name="Ship" Relationship="Self.FK_OpenAssignments_Ships" FromRole="OpenAssignments" ToRole="Ships" />
+        </EntityType>
+        <EntityType Name="PirateDetail">
+          <Key>
+            <PropertyRef Name="PirateID" />
+          </Key>
+          <Property Name="PirateID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResumeFilename" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="HasScurvy" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_PirateDetails" FromRole="PirateDetails" ToRole="Applications" />
+          <NavigationProperty Name="Ships" Relationship="Self.FK_Ships_PirateDetails" FromRole="PirateDetails" ToRole="Ships" />
+        </EntityType>
+        <EntityType Name="Ship">
+          <Key>
+            <PropertyRef Name="ShipID" />
+          </Key>
+          <Property Name="ShipID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShipName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HomePort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CaptainID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="OpenAssignments" Relationship="Self.FK_OpenAssignments_Ships" FromRole="Ships" ToRole="OpenAssignments" />
+          <NavigationProperty Name="PirateDetail" Relationship="Self.FK_Ships_PirateDetails" FromRole="Ships" ToRole="PirateDetails" />
+        </EntityType>
+        <Association Name="FK_Applications_ApplicationStatus">
+          <End Role="ApplicationStatus" Type="PirateJobBoardModel.ApplicationStatus" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatus">
+              <PropertyRef Name="ApplicationStatusID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="ApplicationStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_OpenAssignments">
+          <End Role="OpenAssignments" Type="Self.OpenAssignment" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenAssignments">
+              <PropertyRef Name="OpenAssignmentID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="OpenAssignmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_PirateDetails">
+          <End Role="PirateDetails" Type="Self.PirateDetail" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PirateDetails">
+              <PropertyRef Name="PirateID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="PirateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenAssignments_Assignments">
+          <End Role="Assignments" Type="Self.Assignment" Multiplicity="1" />
+          <End Role="OpenAssignments" Type="Self.OpenAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignments">
+              <PropertyRef Name="AssignmentID" />
+            </Principal>
+            <Dependent Role="OpenAssignments">
+              <PropertyRef Name="AssignmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenAssignments_Ships">
+          <End Role="Ships" Type="Self.Ship" Multiplicity="1" />
+          <End Role="OpenAssignments" Type="Self.OpenAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ships">
+              <PropertyRef Name="ShipID" />
+            </Principal>
+            <Dependent Role="OpenAssignments">
+              <PropertyRef Name="ShipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ships_PirateDetails">
+          <End Role="PirateDetails" Type="Self.PirateDetail" Multiplicity="1" />
+          <End Role="Ships" Type="Self.Ship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PirateDetails">
+              <PropertyRef Name="PirateID" />
+            </Principal>
+            <Dependent Role="Ships">
+              <PropertyRef Name="CaptainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PirateJobBoardEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="Self.Application" />
+          <EntitySet Name="ApplicationStatus1" EntityType="PirateJobBoardModel.ApplicationStatus" />
+          <EntitySet Name="Assignments" EntityType="Self.Assignment" />
+          <EntitySet Name="OpenAssignments" EntityType="Self.OpenAssignment" />
+          <EntitySet Name="PirateDetails" EntityType="Self.PirateDetail" />
+          <EntitySet Name="Ships" EntityType="Self.Ship" />
+          <AssociationSet Name="FK_Applications_ApplicationStatus" Association="Self.FK_Applications_ApplicationStatus">
+            <End Role="ApplicationStatus" EntitySet="ApplicationStatus1" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_OpenAssignments" Association="Self.FK_Applications_OpenAssignments">
+            <End Role="OpenAssignments" EntitySet="OpenAssignments" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_PirateDetails" Association="Self.FK_Applications_PirateDetails">
+            <End Role="PirateDetails" EntitySet="PirateDetails" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenAssignments_Assignments" Association="Self.FK_OpenAssignments_Assignments">
+            <End Role="Assignments" EntitySet="Assignments" />
+            <End Role="OpenAssignments" EntitySet="OpenAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenAssignments_Ships" Association="Self.FK_OpenAssignments_Ships">
+            <End Role="Ships" EntitySet="Ships" />
+            <End Role="OpenAssignments" EntitySet="OpenAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ships_PirateDetails" Association="Self.FK_Ships_PirateDetails">
+            <End Role="PirateDetails" EntitySet="PirateDetails" />
+            <End Role="Ships" EntitySet="Ships" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PirateJobBoardModelStoreContainer" CdmEntityContainer="PirateJobBoardEntities">
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="PirateJobBoardModel.Application">
+              <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="OpenAssignmentID" ColumnName="OpenAssignmentID" />
+                <ScalarProperty Name="PirateID" ColumnName="PirateID" />
+                <ScalarProperty Name="ApplicationDate" ColumnName="ApplicationDate" />
+                <ScalarProperty Name="CaptainNotes" ColumnName="CaptainNotes" />
+                <ScalarProperty Name="ApplicationStatus" ColumnName="ApplicationStatus" />
+                <ScalarProperty Name="ResumeFilename" ColumnName="ResumeFilename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationStatus1">
+            <EntityTypeMapping TypeName="PirateJobBoardModel.ApplicationStatus">
+              <MappingFragment StoreEntitySet="ApplicationStatus">
+                <ScalarProperty Name="ApplicationStatusID" ColumnName="ApplicationStatusID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assignments">
+            <EntityTypeMapping TypeName="PirateJobBoardModel.Assignment">
+              <MappingFragment StoreEntitySet="Assignments">
+                <ScalarProperty Name="AssignmentID" ColumnName="AssignmentID" />
+                <ScalarProperty Name="AssignmentName" ColumnName="AssignmentName" />
+                <ScalarProperty Name="AssignmentDescription" ColumnName="AssignmentDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpenAssignments">
+            <EntityTypeMapping TypeName="PirateJobBoardModel.OpenAssignment">
+              <MappingFragment StoreEntitySet="OpenAssignments">
+                <ScalarProperty Name="OpenAssignmentID" ColumnName="OpenAssignmentID" />
+                <ScalarProperty Name="AssignmentID" ColumnName="AssignmentID" />
+                <ScalarProperty Name="ShipID" ColumnName="ShipID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PirateDetails">
+            <EntityTypeMapping TypeName="PirateJobBoardModel.PirateDetail">
+              <MappingFragment StoreEntitySet="PirateDetails">
+                <ScalarProperty Name="PirateID" ColumnName="PirateID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ResumeFilename" ColumnName="ResumeFilename" />
+                <ScalarProperty Name="HasScurvy" ColumnName="HasScurvy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ships">
+            <EntityTypeMapping TypeName="PirateJobBoardModel.Ship">
+              <MappingFragment StoreEntitySet="Ships">
+                <ScalarProperty Name="ShipID" ColumnName="ShipID" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="HomePort" ColumnName="HomePort" />
+                <ScalarProperty Name="CaptainID" ColumnName="CaptainID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

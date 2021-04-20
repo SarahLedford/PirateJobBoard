@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PirateJobBoard.DATA.EF.Application>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CaptainNotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResumeFilename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpenAssignment.OpenAssignmentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PirateDetail.FirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CaptainNotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResumeFilename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpenAssignment.OpenAssignmentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PirateDetail.FirstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ApplicationID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ApplicationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ApplicationID })
+        </td>
+    </tr>
+}
+
+</table>

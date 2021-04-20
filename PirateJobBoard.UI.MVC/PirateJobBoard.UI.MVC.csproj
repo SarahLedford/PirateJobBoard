@@ -169,9 +169,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
+    <Compile Include="Controllers\ApplicationStatusController.cs" />
+    <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OpenAssignmentsController.cs" />
+    <Compile Include="Controllers\PirateDetailsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\ShipsController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -537,6 +542,31 @@
     <Content Include="Views\Applications\Details.cshtml" />
     <Content Include="Views\Applications\Edit.cshtml" />
     <Content Include="Views\Applications\Index.cshtml" />
+    <Content Include="Views\ApplicationStatus\Create.cshtml" />
+    <Content Include="Views\ApplicationStatus\Delete.cshtml" />
+    <Content Include="Views\ApplicationStatus\Details.cshtml" />
+    <Content Include="Views\ApplicationStatus\Edit.cshtml" />
+    <Content Include="Views\ApplicationStatus\Index.cshtml" />
+    <Content Include="Views\Assignments\Create.cshtml" />
+    <Content Include="Views\Assignments\Delete.cshtml" />
+    <Content Include="Views\Assignments\Details.cshtml" />
+    <Content Include="Views\Assignments\Edit.cshtml" />
+    <Content Include="Views\Assignments\Index.cshtml" />
+    <Content Include="Views\OpenAssignments\Create.cshtml" />
+    <Content Include="Views\OpenAssignments\Delete.cshtml" />
+    <Content Include="Views\OpenAssignments\Details.cshtml" />
+    <Content Include="Views\OpenAssignments\Edit.cshtml" />
+    <Content Include="Views\OpenAssignments\Index.cshtml" />
+    <Content Include="Views\Ships\Create.cshtml" />
+    <Content Include="Views\Ships\Delete.cshtml" />
+    <Content Include="Views\Ships\Details.cshtml" />
+    <Content Include="Views\Ships\Edit.cshtml" />
+    <Content Include="Views\Ships\Index.cshtml" />
+    <Content Include="Views\PirateDetails\Create.cshtml" />
+    <Content Include="Views\PirateDetails\Delete.cshtml" />
+    <Content Include="Views\PirateDetails\Details.cshtml" />
+    <Content Include="Views\PirateDetails\Edit.cshtml" />
+    <Content Include="Views\PirateDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PirateJobBoard.DATA.EF\PirateJobBoard.DATA.EF.csproj">

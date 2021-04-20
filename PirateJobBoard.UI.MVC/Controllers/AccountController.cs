@@ -179,7 +179,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
                     newPirateDetails.PirateID = user.Id;
                     newPirateDetails.FirstName = model.FirstName;
                     newPirateDetails.LastName = model.LastName;
-                    newPirateDetails.ResumeFilename = resumeName;//TODO: handle file upload
+                    newPirateDetails.ResumeFilename = resumeName;
                     newPirateDetails.HasScurvy = model.HasScurvy;
 
 

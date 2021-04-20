@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PirateJobBoard.DATA.EF.OpenAssignment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Assignment.AssignmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ship.ShipName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assignment.AssignmentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ship.ShipName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OpenAssignmentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OpenAssignmentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OpenAssignmentID })
+        </td>
+    </tr>
+}
+
+</table>

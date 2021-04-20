@@ -113,14 +113,41 @@ namespace PirateJobBoard.DATA.EF//.Metadata
         [Required(ErrorMessage = "* Aye, the name of the ship is a requirement, not a guideline!")]
         public string ShipName { get; set; }
 
-        [Display(Name ="Home Port")]
-        [Required(ErrorMessage ="* Aye, the home port is required!")]
-        [StringLength(50, ErrorMessage ="* Aye, there's only room for 50 characters!")]
+        [Display(Name = "Home Port")]
+        [Required(ErrorMessage = "* Aye, the home port is required!")]
+        [StringLength(50, ErrorMessage = "* Aye, there's only room for 50 characters!")]
         public string HomePort { get; set; }
 
-        [Display(Name ="Captain")]
-        [Required(ErrorMessage ="* Aye, you can't have a ship without a captain, now can you?")]
+        [Display(Name = "Captain")]
+        [Required(ErrorMessage = "* Aye, you can't have a ship without a captain, now can you?")]
         public string CaptainID { get; set; }
+    }
+    #endregion
+
+    #region PirateDetails
+    [MetadataType(typeof(PirateDetailMetadata))]
+    public partial class PirateDetail { public string FullName { get { return FirstName + " " + LastName; } } }
+
+    public class PirateDetailMetadata
+    {
+        //public string PirateID { get; set; }
+
+        [Required(ErrorMessage = "* Aye, yer first name is a requirement, not a guideline!")]
+        [Display(Name ="First Name")]
+        [StringLength(50, ErrorMessage = "* Aye, there's only room for 50 characters!")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "* Aye, yer last name is a requirement, not a guideline!")]
+        [Display(Name = "First Name")]
+        [StringLength(50, ErrorMessage = "* Aye, there's only room for 50 characters!")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "* Aye, yer resume is a requirement, not a guideline!")]
+        [Display(Name = "Resume")]
+        public string ResumeFilename { get; set; }
+
+        [Display(Name = "Do ye have scurvy?")]
+        public bool HasScurvy { get; set; }
     }
     #endregion
 }

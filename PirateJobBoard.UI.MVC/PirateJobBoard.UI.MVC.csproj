@@ -205,6 +205,7 @@
     <Content Include="_Archive\favicon-16x16.png" />
     <Content Include="_Archive\favicon-32x32.png" />
     <Content Include="_Archive\favicon.ico" />
+    <Content Include="Keys.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

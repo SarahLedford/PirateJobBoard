@@ -1,3 +1,22 @@
-﻿li{
-    margin:1em;
+﻿body{
+    margin-top: 10vh;
+}
+
+main {
+    padding: 0 2em 0 2em;
+}
+
+li{
+    margin-left:1.75em;
+}
+
+.collapse:not(.show) {
+    display: list-item;
+    text-decoration: none;
+    list-style-type: none;
+    font-weight: 500;
+}
+
+#footer {
+    margin-top: 46.5vh;
 }

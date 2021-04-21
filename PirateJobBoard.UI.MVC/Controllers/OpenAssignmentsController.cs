@@ -6,17 +6,26 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PirateJobBoard.DATA.EF;
 
 namespace PirateJobBoard.UI.MVC.Controllers
 {
+    [Authorize(Roles ="PirateLord, Captain, Crewmate")]
     public class OpenAssignmentsController : Controller
     {
-        private PirateJobBoardEntities db = new PirateJobBoardEntities();
+        private PirateJobBoardEntities db = new PirateJobBoardEntities();        
 
         // GET: OpenAssignments
         public ActionResult Index()
         {
+            string userID = User.Identity.GetUserId();
+            if (User.IsInRole("Captain"))
+            {
+                var openAssignmentsLoc = db.OpenAssignments.Where(x => x.Ship.CaptainID == userID).Include(o => o.Assignment).Include(o => o.Ship);
+
+                return View(openAssignmentsLoc);
+            }
             var openAssignments = db.OpenAssignments.Include(o => o.Assignment).Include(o => o.Ship);
             return View(openAssignments.ToList());
         }
@@ -24,6 +33,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
         // GET: OpenAssignments/Details/5
         public ActionResult Details(int? id)
         {
+            string userID = User.Identity.GetUserId();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -37,16 +47,20 @@ namespace PirateJobBoard.UI.MVC.Controllers
         }
 
         // GET: OpenAssignments/Create
+        [Authorize(Roles = "PirateLord, Captain")]
         public ActionResult Create()
         {
             ViewBag.AssignmentID = new SelectList(db.Assignments, "AssignmentID", "AssignmentName");
             ViewBag.ShipID = new SelectList(db.Ships, "ShipID", "ShipName");
+
+
             return View();
         }
 
         // POST: OpenAssignments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "PirateLord, Captain")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OpenAssignmentID,AssignmentID,ShipID")] OpenAssignment openAssignment)
@@ -64,8 +78,10 @@ namespace PirateJobBoard.UI.MVC.Controllers
         }
 
         // GET: OpenAssignments/Edit/5
+        [Authorize(Roles = "PirateLord, Captain")]
         public ActionResult Edit(int? id)
         {
+            string userID = User.Identity.GetUserId();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -74,6 +90,10 @@ namespace PirateJobBoard.UI.MVC.Controllers
             if (openAssignment == null)
             {
                 return HttpNotFound();
+            }
+            if (User.IsInRole("Captain"))
+            {
+                return openAssignment.Ship.CaptainID == userID ? View(openAssignment) : View("Index");
             }
             ViewBag.AssignmentID = new SelectList(db.Assignments, "AssignmentID", "AssignmentName", openAssignment.AssignmentID);
             ViewBag.ShipID = new SelectList(db.Ships, "ShipID", "ShipName", openAssignment.ShipID);
@@ -85,6 +105,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "PirateLord, Captain")]
         public ActionResult Edit([Bind(Include = "OpenAssignmentID,AssignmentID,ShipID")] OpenAssignment openAssignment)
         {
             if (ModelState.IsValid)
@@ -99,8 +120,10 @@ namespace PirateJobBoard.UI.MVC.Controllers
         }
 
         // GET: OpenAssignments/Delete/5
+        [Authorize(Roles = "PirateLord, Captain")]
         public ActionResult Delete(int? id)
         {
+            string userID = User.Identity.GetUserId();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -110,10 +133,15 @@ namespace PirateJobBoard.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
+            if (User.IsInRole("Captain"))
+            {
+                return openAssignment.Ship.CaptainID == userID ? View(openAssignment) : View("Index");
+            }
             return View(openAssignment);
         }
 
         // POST: OpenAssignments/Delete/5
+        [Authorize(Roles = "PirateLord, Captain")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

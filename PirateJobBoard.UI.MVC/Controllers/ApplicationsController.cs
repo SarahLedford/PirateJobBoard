@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PirateJobBoard.DATA.EF;
 
 namespace PirateJobBoard.UI.MVC.Controllers
@@ -18,6 +19,18 @@ namespace PirateJobBoard.UI.MVC.Controllers
         // GET: Applications
         public ActionResult Index()
         {
+            string userID = User.Identity.GetUserId();
+            if (User.IsInRole("Captain"))
+            {
+                var applicationsCaptain = db.Applications.Where(a => a.OpenAssignment.Ship.CaptainID == userID).Include(a => a.ApplicationStatu).Include(a => a.OpenAssignment).Include(a => a.PirateDetail);
+                return View(applicationsCaptain.ToList());
+            }
+            else if (User.IsInRole("Crewmate"))
+            {
+                var applicationsCrew = db.Applications.Where(a => a.PirateID == userID).Include(a => a.ApplicationStatu).Include(a => a.OpenAssignment).Include(a => a.PirateDetail);
+                return View(applicationsCrew.ToList());
+            }
+
             var applications = db.Applications.Include(a => a.ApplicationStatu).Include(a => a.OpenAssignment).Include(a => a.PirateDetail);
             return View(applications.ToList());
         }
@@ -25,6 +38,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
         // GET: Applications/Details/5
         public ActionResult Details(int? id)
         {
+            string userID = User.Identity.GetUserId();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -34,18 +48,26 @@ namespace PirateJobBoard.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
+            if (User.IsInRole("Captain"))
+            {
+                return application.OpenAssignment.Ship.CaptainID == userID ? View(application) : View("Index");
+            }
+            if (User.IsInRole("Crewmate"))
+            {
+                return application.PirateID == userID ? View(application) : View("Index");
+            }
             return View(application);
         }
 
         // GET: Applications/Create
-        [Authorize(Roles = "Crewmate")]
-        public ActionResult Create()
-        {
-            ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName");
-            ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID");
-            ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName");
-            return View();
-        }
+        //[Authorize(Roles = "Crewmate")]
+        //public ActionResult Create()
+        //{
+        //    ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName");
+        //    ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID");
+        //    ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName");
+        //    return View();
+        //}
 
         // POST: Applications/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -53,19 +75,23 @@ namespace PirateJobBoard.UI.MVC.Controllers
         [Authorize(Roles = "Crewmate")]//TODO -- MAKE ONE-CLICK APPLY
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ApplicationID,OpenAssignmentID,PirateID,ApplicationDate,CaptainNotes,ApplicationStatus,ResumeFilename")] Application application)
+        public ActionResult Create([Bind(Include = "ApplicationID,OpenAssignmentID,PirateID,ApplicationDate,CaptainNotes,ApplicationStatus,ResumeFilename")] Application application, int? id)
         {
+            string userID = User.Identity.GetUserId();
+            Application app = new Application() { OpenAssignmentID = application.OpenAssignmentID, PirateID = userID, ApplicationDate = DateTime.Now, CaptainNotes = "", ApplicationStatus = 1, ResumeFilename = userID  };//TEST
+
+
             if (ModelState.IsValid)
             {
-                db.Applications.Add(application);
+                db.Applications.Add(app);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
-            ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID", application.OpenAssignmentID);
-            ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName", application.PirateID);
-            return View(application);
+            //ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
+            //ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID", application.OpenAssignmentID);
+            //ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName", application.PirateID);
+            return RedirectToAction("Index");
         }
 
         // GET: Applications/Edit/5
@@ -82,8 +108,8 @@ namespace PirateJobBoard.UI.MVC.Controllers
                 return HttpNotFound();
             }
             ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
-            ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID", application.OpenAssignmentID);
-            ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName", application.PirateID);
+            //ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID", application.OpenAssignmentID);
+            //ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName", application.PirateID);
             return View(application);
         }
 
@@ -102,8 +128,8 @@ namespace PirateJobBoard.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
-            ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID", application.OpenAssignmentID);
-            ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName", application.PirateID);
+            //ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID", application.OpenAssignmentID);
+            //ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName", application.PirateID);
             return View(application);
         }
 

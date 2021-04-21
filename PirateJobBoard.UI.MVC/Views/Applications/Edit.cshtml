@@ -19,24 +19,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OpenAssignmentID, "OpenAssignmentID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OpenAssignmentID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.OpenAssignmentID, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.OpenAssignmentID)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.PirateID, "PirateID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("PirateID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PirateID, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.PirateID)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ApplicationDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ApplicationDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ApplicationDate, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.ApplicationDate)
             </div>
         </div>
 
@@ -56,13 +53,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.ResumeFilename, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ResumeFilename, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ResumeFilename, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

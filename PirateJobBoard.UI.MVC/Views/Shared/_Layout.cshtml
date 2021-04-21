@@ -33,95 +33,138 @@
     <main class="main" id="top">
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 backdrop" data-navbar-on-scroll="data-navbar-on-scroll">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center fw-bolder fs-2 fst-italic" href="#">
-                    <div class="text-info">JO</div>
-                    <div class="text-warning">BEST</div>
+                <a class="navbar-brand d-flex align-items-center fw-bolder fs-2 fst-italic" href="@Url.Action("Index", "Home")">
+                    <div class="text-info">Pirate</div>
+                    <div class="text-warning">Jobs</div>
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                @*<button class="" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>*@
                 <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-                        <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#">Home</a></li>
-                        <li class="nav-item px-2"><a class="nav-link fw-medium" href="#features">Jobs</a></li>
-                        <li class="nav-item px-2"><a class="nav-link fw-medium" href="#pricing">Career tips</a></li>
+                        <li class="nav-item px-2"><a class="nav-link fw-medium" href="@Url.Action("Index", "OpenAssignments")">Open Assignments</a></li>
+                        <li class="nav-item px-2"><a class="nav-link fw-medium" href="@Url.Action("Index", "Applications")">Applications</a></li>
+                        @if (Request.IsAuthenticated && User.IsInRole("Crewmate"))
+                        {
+                            <li class="nav-item px-2"><a class="nav-link fw-medium" href="@Url.Action("Index", "PirateDetails")">Yer Profile</a></li>
+                            @*<li class="collapse navbar-collapse nav-item px-2" id="navbarDropdown">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown nav-item px-2">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Yer Profile
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+                                                <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Index", "PirateDetails")">View</a></li>
+                                                <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Edit", "PirateDetails", new { id = PirateJobBoard.DAT })">Edit</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>*@
+                        }
+                        @if (Request.IsAuthenticated && User.IsInRole("PirateLord"))
+                        {
+                            <li class="collapse navbar-collapse nav-item px-2" id="navbarDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown nav-item px-2">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Lordly Duties
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+                                            <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Index", "Ships")">Ships</a></li>
+                                            <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Index", "Assignments")">Assignments</a></li>
+                                            <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Index", "ApplicationStatus")">Application Statuses</a></li>
+                                            <li>@Html.ActionLink("Roles", "Index", "RolesAdmin", null, new { @class = "dropdown-item nav-link fw-medium" })</li>
+                                            <li>@Html.ActionLink("Users", "Index", "UsersAdmin", null, new { @class = "dropdown-item nav-link fw-medium" })</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
-                    <form class="ps-lg-5">
-                        @Html.Partial("_LoginPartial")
-                    </form>
+                    @Html.Partial("_LoginPartial")
                 </div>
             </div>
         </nav>
+        <div id="MessageDisplay" class="row">
+            <div class="col-md-10 col-md-offset-1" id="MessageContent">
 
+            </div>
+        </div>
         @RenderBody()
 
+        
+    </main>
+    <footer>
         <!-- Footer ============================-->
         <!-- ============================================-->
 
-        <section class="py-0 bg-primary-gradient">
+        <section class="py-0 bg-primary-gradient" id="footer">
             <div class="bg-holder" style="background-image:url(../../Content/assets/img/illustrations/footer-bg.png);background-position:center;background-size:cover;">
             </div>
             <!--/.bg-holder-->
             <div class="container">
                 <div class="row flex-center py-4">
                     @*<div class="col-lg-6 mb-4 text-center">
-                                <h1 class="text-white">Get started now</h1>
-                            </div>
-                            <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center">
-                                <form class="row row-cols-lg-auto g-0 align-items-center">
-                                    <div class="col-9 col-lg-8">
-                                        <label class="visually-hidden" for="colFormLabel">Username</label>
-                                        <div class="input-group">
-                                            <input class="rounded-end-0 form-control" id="colFormLabel" type="email" placeholder="email address" />
-                                        </div>
-                                    </div>
-                                    <div class="col-3 col-lg-4">
-                                        <button class="btn btn-primary rounded-start-0" type="submit">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
+                            <h1 class="text-white">Get started now</h1>
                         </div>
-                        <div class="row justify-content-lg-between">
-                            <div class="col-6 col-sm-4 col-lg-auto mb-3">
-                                <h5 class="mb-5 text-white">CATEGORIES </h5>
-                                <ul class="list-unstyled mb-md-4 mb-lg-0">
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">IOS Developers</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Front-End Developers</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">UX Designers</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">UI Designers</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Content Writer</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Program &amp; Tech</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-6 col-sm-4 col-lg-auto mb-3">
-                                <h5 class="mb-5 text-white">COMMUNITY </h5>
-                                <ul class="list-unstyled mb-md-4 mb-lg-0">
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Events</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Blog</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Forum</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Podcast</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Affiliates</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Invite a Friend</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-6 col-sm-4 col-lg-auto mb-3">
-                                <h5 class="mb-5 text-white">ABOUT </h5>
-                                <ul class="list-unstyled mb-md-4 mb-lg-0">
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">About Us</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Partnerships</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Finance Experts</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Project Management</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Product Manager</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">The Team</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-6 col-sm-4 col-lg-auto mb-3">
-                                <h5 class="mb-5 text-white">CONTACT </h5>
-                                <ul class="list-unstyled mb-md-4 mb-lg-0">
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Contact Us</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Press Center</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Careers</a></li>
-                                    <li class="mb-3"><a class="text-light text-decoration-none" href="#!">FAQ</a></li>
-                                </ul>
-                            </div>*@
+                        <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center">
+                            <form class="row row-cols-lg-auto g-0 align-items-center">
+                                <div class="col-9 col-lg-8">
+                                    <label class="visually-hidden" for="colFormLabel">Username</label>
+                                    <div class="input-group">
+                                        <input class="rounded-end-0 form-control" id="colFormLabel" type="email" placeholder="email address" />
+                                    </div>
+                                </div>
+                                <div class="col-3 col-lg-4">
+                                    <button class="btn btn-primary rounded-start-0" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row justify-content-lg-between">
+                        <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                            <h5 class="mb-5 text-white">CATEGORIES </h5>
+                            <ul class="list-unstyled mb-md-4 mb-lg-0">
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">IOS Developers</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Front-End Developers</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">UX Designers</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">UI Designers</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Content Writer</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Program &amp; Tech</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                            <h5 class="mb-5 text-white">COMMUNITY </h5>
+                            <ul class="list-unstyled mb-md-4 mb-lg-0">
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Events</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Blog</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Forum</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Podcast</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Affiliates</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Invite a Friend</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                            <h5 class="mb-5 text-white">ABOUT </h5>
+                            <ul class="list-unstyled mb-md-4 mb-lg-0">
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">About Us</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Partnerships</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Finance Experts</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Project Management</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Product Manager</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">The Team</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                            <h5 class="mb-5 text-white">CONTACT </h5>
+                            <ul class="list-unstyled mb-md-4 mb-lg-0">
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Contact Us</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Press Center</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">Careers</a></li>
+                                <li class="mb-3"><a class="text-light text-decoration-none" href="#!">FAQ</a></li>
+                            </ul>
+                        </div>*@
                 </div>
 
                 @* Social Icons *@
@@ -167,7 +210,7 @@
 
         <!-- Footer End ============================-->
         <!-- ============================================-->
-    </main>
+    </footer>
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->

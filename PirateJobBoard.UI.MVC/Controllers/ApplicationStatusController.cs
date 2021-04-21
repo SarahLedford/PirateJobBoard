@@ -10,6 +10,7 @@ using PirateJobBoard.DATA.EF;
 
 namespace PirateJobBoard.UI.MVC.Controllers
 {
+    [Authorize(Roles ="PirateLord")]
     public class ApplicationStatusController : Controller
     {
         private PirateJobBoardEntities db = new PirateJobBoardEntities();

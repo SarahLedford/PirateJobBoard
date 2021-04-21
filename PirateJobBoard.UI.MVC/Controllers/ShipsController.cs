@@ -6,10 +6,15 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using PirateJobBoard.DATA.EF;
+using PirateJobBoard.UI.MVC.Models;
 
 namespace PirateJobBoard.UI.MVC.Controllers
 {
+    [Authorize(Roles = "PirateLord")]
     public class ShipsController : Controller
     {
         private PirateJobBoardEntities db = new PirateJobBoardEntities();
@@ -39,7 +44,27 @@ namespace PirateJobBoard.UI.MVC.Controllers
         // GET: Ships/Create
         public ActionResult Create()
         {
-            ViewBag.CaptainID = new SelectList(db.PirateDetails, "PirateID", "FirstName");
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            var pirates = db.PirateDetails.ToList();
+            List<PirateDetail> captains = new List<PirateDetail>();
+            foreach (var pirate in pirates)
+            {
+                if (userManager.IsInRole(pirate.PirateID, "Captain"))
+                {
+                    captains.Add(pirate);
+                }
+            }
+
+            //var userID = db.AspNetUsers.Find()
+            //List<string> roles = new List<string>();
+            //foreach (var item in Roles.GetAllRoles())
+            //{
+            //    roles.Add(item);
+            //}
+            //var captainRole = roles.Find("Captain"); User.IsInRole("Captain")
+            //var userRoles = userManager.GetRoles()
+            ViewBag.CaptainID = new SelectList(captains, "PirateID", "FullName");
             return View();
         }
 
@@ -95,30 +120,30 @@ namespace PirateJobBoard.UI.MVC.Controllers
         }
 
         // GET: Ships/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ship ship = db.Ships.Find(id);
-            if (ship == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ship);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Ship ship = db.Ships.Find(id);
+        //    if (ship == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(ship);
+        //}
 
         // POST: Ships/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Ship ship = db.Ships.Find(id);
-            db.Ships.Remove(ship);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Ship ship = db.Ships.Find(id);
+        //    db.Ships.Remove(ship);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

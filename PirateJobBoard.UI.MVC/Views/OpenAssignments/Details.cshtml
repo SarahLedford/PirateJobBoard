@@ -1,4 +1,6 @@
 ﻿@model PirateJobBoard.DATA.EF.OpenAssignment
+@using Microsoft.AspNet.Identity;
+@using PirateJobBoard.DATA.EF;
 
 @{
     ViewBag.Title = "Details";
@@ -25,11 +27,39 @@
         <dd>
             @Html.DisplayFor(model => model.Ship.ShipName)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.Assignment.AssignmentDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assignment.AssignmentDescription)
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Apply!", "OneClickApply", new { id = Model.OpenAssignmentID }, htmlAttributes: new { @class = "btn btn-success"}) |
+    @{
+        PirateJobBoardEntities db = new PirateJobBoardEntities();
+        string pirateId = User.Identity.GetUserId();
+        PirateDetail pirate = db.PirateDetails.Find(pirateId);
+        string resume = db.PirateDetails.Find(pirateId).ResumeFilename;
+        Application existingApplication = db.Applications.Where(x => x.PirateID == pirateId && x.OpenAssignmentID == Model.OpenAssignmentID).FirstOrDefault();
+    }
+    @if (pirate.ResumeFilename == "")
+    {
+        <span>Ye need to upload a resume before you can apply!</span>
+
+    }
+    else if (existingApplication != null)
+    {
+        <span class="alert-warning">
+            Ye have already applied to this position, matey. <br />
+        </span>
+        <a href="@Url.Action("Details", "Applications", new { id = existingApplication.ApplicationID })">View</a>
+    }
+    else
+    {
+        @Html.ActionLink("Apply!", "OneClickApply", new { id = Model.OpenAssignmentID }, htmlAttributes: new { @class = "btn btn-success" }) @:|
+    }
+    <br />
     @Html.ActionLink("Edit", "Edit", new { id = Model.OpenAssignmentID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -142,7 +142,7 @@ namespace PirateJobBoard.DATA.EF//.Metadata
         [StringLength(50, ErrorMessage = "* Aye, there's only room for 50 characters!")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "* Aye, yer resume is a requirement, not a guideline!")]
+
         [Display(Name = "Resume")]
         public string ResumeFilename { get; set; }
 

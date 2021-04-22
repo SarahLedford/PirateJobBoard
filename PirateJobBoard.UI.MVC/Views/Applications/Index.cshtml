@@ -54,7 +54,7 @@ else
                         @Html.DisplayFor(modelItem => item.ResumeFilename)
                     </td>*@
                 <td>
-                    <span id="statusDescr" title="@item.ApplicationStatu.StatusDescription">
+                    <span class="statusDescr" title="@item.ApplicationStatu.StatusDescription">
                         @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
                     </span>
                 </td>
@@ -85,7 +85,7 @@ else
 @section scripts{
     <script>
         $(function () {
-            $("#statusDescr").tooltip();
+            $(".statusDescr").tooltip();
         });
     </script>
 }

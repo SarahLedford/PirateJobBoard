@@ -11,10 +11,10 @@ using PirateJobBoard.DATA.EF;
 
 namespace PirateJobBoard.UI.MVC.Controllers
 {
-    [Authorize(Roles ="PirateLord, Captain, Crewmate")]
+    [Authorize(Roles = "PirateLord, Captain, Crewmate")]
     public class OpenAssignmentsController : Controller
     {
-        private PirateJobBoardEntities db = new PirateJobBoardEntities();        
+        private PirateJobBoardEntities db = new PirateJobBoardEntities();
 
         // GET: OpenAssignments
         public ActionResult Index()
@@ -79,8 +79,16 @@ namespace PirateJobBoard.UI.MVC.Controllers
 
         public ActionResult OneClickApply(int id)
         {
+
             string userID = User.Identity.GetUserId();
             string resume = db.PirateDetails.Find(userID).ResumeFilename;
+            Application existingApplication = db.Applications.Where(x => x.PirateID == userID && x.OpenAssignmentID == id).FirstOrDefault();
+            if (existingApplication != null)
+            {
+                ViewBag.Message = "Ye have already applied to this position, matey. Nice try!";
+                return RedirectToAction("Index");
+            }
+
             Application app = new Application() { PirateID = userID, ApplicationDate = DateTime.Now, ApplicationStatus = 1, ResumeFilename = resume, CaptainNotes = "", OpenAssignmentID = id };
 
             db.Applications.Add(app);

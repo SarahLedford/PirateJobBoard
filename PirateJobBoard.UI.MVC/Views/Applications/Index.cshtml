@@ -16,30 +16,32 @@
 }
 else
 {
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CaptainNotes)
-            </th>
-            <th>
-                Status
-            </th>
-            <th>
-                Assignment
-            </th>
-            <th>
-                Ship
-            </th>
-            @if (!User.IsInRole("Crewmate"))
-            {
-                <th>Applicant</th>
-                <th>Resume</th>
-            }
-            <th></th>
-        </tr>
+    <table class="table table-hover text-center" id="apps">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CaptainNotes)
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Assignment
+                </th>
+                <th>
+                    Ship
+                </th>
+                @if (!User.IsInRole("Crewmate"))
+                {
+                    <th>Applicant</th>
+                    <th>Resume</th>
+                }
+                <th></th>
+            </tr>
+        </thead>
 
         @foreach (var item in Model)
         {
@@ -88,4 +90,10 @@ else
             $(".statusDescr").tooltip();
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#apps').DataTable();
+        });
+    </script>
+
 }

@@ -12,16 +12,18 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Assignment.AssignmentName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ship.ShipName)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-hover text-center" id="openAssignments">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Assignment.AssignmentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ship.ShipName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
@@ -71,3 +73,10 @@
     }
 
 </table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#openAssignments').DataTable();
+        });
+    </script>
+}

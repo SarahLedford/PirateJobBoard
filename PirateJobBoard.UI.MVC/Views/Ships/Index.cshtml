@@ -9,37 +9,47 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ShipName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HomePort)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PirateDetail.FirstName)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-hover text-center" id="ships">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomePort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PirateDetail.FirstName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShipName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HomePort)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PirateDetail.FirstName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ShipID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ShipID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ShipID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomePort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PirateDetail.FirstName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ShipID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ShipID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ShipID })
+            </td>
+        </tr>
+    }
 
 </table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#ships').DataTable();
+        });
+    </script>
+}

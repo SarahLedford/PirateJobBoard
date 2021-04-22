@@ -9,31 +9,41 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusDescription)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-hover text-center" id="statuses">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ApplicationStatusID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ApplicationStatusID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ApplicationStatusID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusDescription)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationStatusID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ApplicationStatusID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationStatusID })
+            </td>
+        </tr>
+    }
 
 </table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#statuses').DataTable();
+        });
+    </script>
+}

@@ -138,7 +138,7 @@ namespace PirateJobBoard.DATA.EF//.Metadata
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "* Aye, yer last name is a requirement, not a guideline!")]
-        [Display(Name = "First Name")]
+        [Display(Name = "Last Name")]
         [StringLength(50, ErrorMessage = "* Aye, there's only room for 50 characters!")]
         public string LastName { get; set; }
 

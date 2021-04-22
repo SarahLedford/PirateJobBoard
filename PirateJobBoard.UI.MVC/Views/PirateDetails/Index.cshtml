@@ -1,14 +1,10 @@
 ﻿@model IEnumerable<PirateJobBoard.DATA.EF.PirateDetail>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Yer Details";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>@ViewBag.Title</h2>
 <table class="table">
     <tr>
         <th>
@@ -35,15 +31,13 @@
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ResumeFilename)
+            <a href="~/Content/Resumes/@item.ResumeFilename" target="_blank">View</a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.HasScurvy)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PirateID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PirateID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PirateID })
+            <a href="@Url.Action("Edit", "PirateDetails", new { id = item.PirateID })"><i class="fa fa-edit mx-2"></i></a>
         </td>
     </tr>
 }

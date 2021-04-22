@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<PirateJobBoard.DATA.EF.Ship>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Ships";
 }
 
-<h2>Index</h2>
+<h2 class="my-4">@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h3>
+    <a href="@Url.Action("Create", "Ships")"><i class="fa fa-plus mx-2"></i></a>
+</h3>
 <table class="table table-hover text-center" id="ships">
     <thead>
         <tr>
@@ -19,7 +19,8 @@
                 @Html.DisplayNameFor(model => model.HomePort)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PirateDetail.FirstName)
+                @*@Html.DisplayNameFor(model => model.PirateDetail.FirstName)*@
+                Captain
             </th>
             <th></th>
         </tr>
@@ -35,12 +36,11 @@
                 @Html.DisplayFor(modelItem => item.HomePort)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PirateDetail.FirstName)
+                @Html.DisplayFor(modelItem => item.PirateDetail.FullName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ShipID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ShipID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ShipID })
+                <a href="@Url.Action("Edit", "Ships", new { id = item.ShipID })"><i class="fa fa-edit mx-2"></i></a>
+                <a href="@Url.Action("Details", "Ships", new { id = item.ShipID })"><i class="fa fa-info mx-2"></i></a>
             </td>
         </tr>
     }

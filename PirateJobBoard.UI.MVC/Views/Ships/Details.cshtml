@@ -4,11 +4,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
+<h2 class="my-4"><em>@Model.ShipName</em> @ViewBag.Title <a href="@Url.Action("Edit", "Ships", new { id = Model.ShipID })"><i class="fa fa-edit mx-2"></i></a></h2>
+<p>
+    
+</p>
 <div>
-    <h4>Ship</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ShipName)
@@ -27,16 +27,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PirateDetail.FirstName)
+            @*@Html.DisplayNameFor(model => model.PirateDetail.FirstName)*@
+            Captain
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PirateDetail.FirstName)
+            @Html.DisplayFor(model => model.PirateDetail.FullName)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ShipID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index", "Ships")" class="text-decoration-none"><i class="fa fa-arrow-left mx-2"></i> Go Back</a>
 </p>

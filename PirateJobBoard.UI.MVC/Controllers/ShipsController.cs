@@ -75,6 +75,17 @@ namespace PirateJobBoard.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ShipID,ShipName,HomePort,CaptainID")] Ship ship)
         {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            var pirates = db.PirateDetails.ToList();
+            List<PirateDetail> captains = new List<PirateDetail>();
+            foreach (var pirate in pirates)
+            {
+                if (userManager.IsInRole(pirate.PirateID, "Captain"))
+                {
+                    captains.Add(pirate);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Ships.Add(ship);
@@ -82,13 +93,24 @@ namespace PirateJobBoard.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CaptainID = new SelectList(db.PirateDetails, "PirateID", "FirstName", ship.CaptainID);
+            ViewBag.CaptainID = new SelectList(captains, "PirateID", "FullName");
             return View(ship);
         }
 
         // GET: Ships/Edit/5
         public ActionResult Edit(int? id)
         {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            var pirates = db.PirateDetails.ToList();
+            List<PirateDetail> captains = new List<PirateDetail>();
+            foreach (var pirate in pirates)
+            {
+                if (userManager.IsInRole(pirate.PirateID, "Captain"))
+                {
+                    captains.Add(pirate);
+                }
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -98,7 +120,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CaptainID = new SelectList(db.PirateDetails, "PirateID", "FirstName", ship.CaptainID);
+            ViewBag.CaptainID = new SelectList(captains, "PirateID", "FullName", ship.CaptainID);
             return View(ship);
         }
 
@@ -109,13 +131,24 @@ namespace PirateJobBoard.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ShipID,ShipName,HomePort,CaptainID")] Ship ship)
         {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            var pirates = db.PirateDetails.ToList();
+            List<PirateDetail> captains = new List<PirateDetail>();
+            foreach (var pirate in pirates)
+            {
+                if (userManager.IsInRole(pirate.PirateID, "Captain"))
+                {
+                    captains.Add(pirate);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(ship).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CaptainID = new SelectList(db.PirateDetails, "PirateID", "FirstName", ship.CaptainID);
+            ViewBag.CaptainID = new SelectList(captains, "PirateID", "FullName");
             return View(ship);
         }
 

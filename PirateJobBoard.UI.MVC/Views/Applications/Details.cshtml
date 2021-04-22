@@ -26,19 +26,21 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.ResumeFilename)
-        </dt>
+                @Html.DisplayNameFor(model => model.ResumeFilename)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ResumeFilename)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.ResumeFilename)
+            </dd>*@
 
         <dt>
             Status
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ApplicationStatu.StatusName)
+            <span id="statusDescr" title="@Model.ApplicationStatu.StatusDescription">
+                @Html.DisplayFor(model => model.ApplicationStatu.StatusName)
+            </span>
         </dd>
 
         <dt>
@@ -53,10 +55,10 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.OpenAssignment.Ship.ShipName),
-           
+
             @Html.DisplayFor(model => model.OpenAssignment.Ship.PirateDetail.FullName)
         </dd>
-        
+
         @if (!User.IsInRole("Crewmate"))
         {
             <dt>
@@ -81,3 +83,12 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#statusDescr").tooltip();
+        });
+    </script>
+}

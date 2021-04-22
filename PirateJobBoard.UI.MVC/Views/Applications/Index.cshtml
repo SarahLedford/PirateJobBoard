@@ -43,40 +43,49 @@ else
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CaptainNotes)
-            </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.ResumeFilename)
-        </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OpenAssignment.Assignment.AssignmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OpenAssignment.Ship.ShipName)
-            </td>
-            @if (!User.IsInRole("Crewmate"))
-            {
+            <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PirateDetail.FullName)
+                    @Html.DisplayFor(modelItem => item.ApplicationDate)
                 </td>
                 <td>
-                    <a href="~/Content/Resumes/@item.ResumeFilename" target="_blank">View</a>
+                    @Html.DisplayFor(modelItem => item.CaptainNotes)
                 </td>
-            }
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ApplicationID })
-            </td>
-        </tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.ResumeFilename)
+                    </td>*@
+                <td>
+                    <span id="statusDescr" title="@item.ApplicationStatu.StatusDescription">
+                        @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
+                    </span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenAssignment.Assignment.AssignmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenAssignment.Ship.ShipName)
+                </td>
+                @if (!User.IsInRole("Crewmate"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PirateDetail.FullName)
+                    </td>
+                    <td>
+                        <a href="~/Content/Resumes/@item.ResumeFilename" target="_blank">View</a>
+                    </td>
+                }
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ApplicationID })
+                </td>
+            </tr>
         }
 
     </table>
+}
+@section scripts{
+    <script>
+        $(function () {
+            $("#statusDescr").tooltip();
+        });
+    </script>
 }

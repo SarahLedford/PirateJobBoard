@@ -7,7 +7,7 @@
     PirateDetail currentPirate = db.PirateDetails.Where(p => p.PirateID == pirateID).FirstOrDefault();
 
     string pirateFN = "Guest";
-    //string color = currentPirate.HasScurvy == true ? "#00ff00" : "black";
+    string color = currentPirate.HasScurvy == true ? "#00ff00" : "black";
 
     if (currentPirate != null)
     {
@@ -19,7 +19,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Ahoy there, " + pirateFN + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage"/*, style = $"color: {color}"*/ })
+                @Html.ActionLink("Ahoy there, " + pirateFN + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = $"color: {color}" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>

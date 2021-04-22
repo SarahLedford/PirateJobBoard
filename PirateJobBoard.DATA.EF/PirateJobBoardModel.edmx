@@ -310,13 +310,13 @@
         </Association>
         <EntityContainer Name="PirateJobBoardEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Applications" EntityType="Self.Application" />
-          <EntitySet Name="ApplicationStatus1" EntityType="PirateJobBoardModel.ApplicationStatus" />
+          <EntitySet Name="ApplicationStatus" EntityType="PirateJobBoardModel.ApplicationStatus" />
           <EntitySet Name="Assignments" EntityType="Self.Assignment" />
           <EntitySet Name="OpenAssignments" EntityType="Self.OpenAssignment" />
           <EntitySet Name="PirateDetails" EntityType="Self.PirateDetail" />
           <EntitySet Name="Ships" EntityType="Self.Ship" />
           <AssociationSet Name="FK_Applications_ApplicationStatus" Association="Self.FK_Applications_ApplicationStatus">
-            <End Role="ApplicationStatus" EntitySet="ApplicationStatus1" />
+            <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
             <End Role="Applications" EntitySet="Applications" />
           </AssociationSet>
           <AssociationSet Name="FK_Applications_OpenAssignments" Association="Self.FK_Applications_OpenAssignments">
@@ -359,7 +359,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ApplicationStatus1">
+          <EntitySetMapping Name="ApplicationStatus">
             <EntityTypeMapping TypeName="PirateJobBoardModel.ApplicationStatus">
               <MappingFragment StoreEntitySet="ApplicationStatus">
                 <ScalarProperty Name="ApplicationStatusID" ColumnName="ApplicationStatusID" />

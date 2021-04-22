@@ -18,7 +18,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
         // GET: ApplicationStatus
         public ActionResult Index()
         {
-            return View(db.ApplicationStatus1.ToList());
+            return View(db.ApplicationStatus.ToList());
         }
 
         // GET: ApplicationStatus/Details/5
@@ -28,7 +28,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationStatus applicationStatus = db.ApplicationStatus1.Find(id);
+            ApplicationStatus applicationStatus = db.ApplicationStatus.Find(id);
             if (applicationStatus == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ApplicationStatus1.Add(applicationStatus);
+                db.ApplicationStatus.Add(applicationStatus);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationStatus applicationStatus = db.ApplicationStatus1.Find(id);
+            ApplicationStatus applicationStatus = db.ApplicationStatus.Find(id);
             if (applicationStatus == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationStatus applicationStatus = db.ApplicationStatus1.Find(id);
+            ApplicationStatus applicationStatus = db.ApplicationStatus.Find(id);
             if (applicationStatus == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace PirateJobBoard.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ApplicationStatus applicationStatus = db.ApplicationStatus1.Find(id);
-            db.ApplicationStatus1.Remove(applicationStatus);
+            ApplicationStatus applicationStatus = db.ApplicationStatus.Find(id);
+            db.ApplicationStatus.Remove(applicationStatus);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

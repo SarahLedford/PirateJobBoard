@@ -17,22 +17,25 @@
         @Html.HiddenFor(model => model.ApplicationID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OpenAssignmentID, "OpenAssignmentID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.OpenAssignment.Assignment.AssignmentName, "Assignment", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.OpenAssignmentID)
+                @Html.HiddenFor(model => model.OpenAssignment.Assignment.AssignmentName)
+                @Html.DisplayFor(model => model.OpenAssignment.Assignment.AssignmentName)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PirateID, "PirateID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PirateDetail.FullName, "Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.PirateID)
+                @Html.HiddenFor(model => model.PirateDetail.FullName)
+                @Html.DisplayFor(model => model.PirateDetail.FullName)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ApplicationDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @Html.HiddenFor(model => model.ApplicationDate)
                 @Html.DisplayFor(model => model.ApplicationDate)
             </div>
         </div>
@@ -48,11 +51,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ApplicationStatus, "ApplicationStatus", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @Html.HiddenFor(model => model.ApplicationStatu)
                 @Html.DropDownList("ApplicationStatus", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ApplicationStatus, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        @Html.HiddenFor(model => model.ResumeFilename)
         @*<div class="form-group">
             @Html.LabelFor(model => model.ResumeFilename, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

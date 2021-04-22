@@ -63,7 +63,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
         //[Authorize(Roles = "Crewmate")]
         //public ActionResult Create()
         //{
-        //    ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName");
+        //    ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus, "ApplicationStatusID", "StatusName");
         //    ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID");
         //    ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName");
         //    return View();
@@ -88,7 +88,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
+            //ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
             //ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID", application.OpenAssignmentID);
             //ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName", application.PirateID);
             return RedirectToAction("Index");
@@ -107,7 +107,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
+            ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
             //ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID", application.OpenAssignmentID);
             //ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName", application.PirateID);
             return View(application);
@@ -127,7 +127,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
+            ViewBag.ApplicationStatus = new SelectList(db.ApplicationStatus, "ApplicationStatusID", "StatusName", application.ApplicationStatus);
             //ViewBag.OpenAssignmentID = new SelectList(db.OpenAssignments, "OpenAssignmentID", "OpenAssignmentID", application.OpenAssignmentID);
             //ViewBag.PirateID = new SelectList(db.PirateDetails, "PirateID", "FirstName", application.PirateID);
             return View(application);

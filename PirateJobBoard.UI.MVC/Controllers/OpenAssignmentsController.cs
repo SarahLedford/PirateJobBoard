@@ -77,6 +77,17 @@ namespace PirateJobBoard.UI.MVC.Controllers
             return View(openAssignment);
         }
 
+        public ActionResult OneClickApply(int id)
+        {
+            string userID = User.Identity.GetUserId();
+            string resume = db.PirateDetails.Find(userID).ResumeFilename;
+            Application app = new Application() { PirateID = userID, ApplicationDate = DateTime.Now, ApplicationStatus = 1, ResumeFilename = resume, CaptainNotes = "", OpenAssignmentID = id };
+
+            db.Applications.Add(app);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Applications");
+        }
+
         // GET: OpenAssignments/Edit/5
         [Authorize(Roles = "PirateLord, Captain")]
         public ActionResult Edit(int? id)

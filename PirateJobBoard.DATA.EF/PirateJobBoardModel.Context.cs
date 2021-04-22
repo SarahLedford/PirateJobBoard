@@ -26,7 +26,7 @@ namespace PirateJobBoard.DATA.EF
         }
     
         public virtual DbSet<Application> Applications { get; set; }
-        public virtual DbSet<ApplicationStatus> ApplicationStatus1 { get; set; }
+        public virtual DbSet<ApplicationStatus> ApplicationStatus { get; set; }
         public virtual DbSet<Assignment> Assignments { get; set; }
         public virtual DbSet<OpenAssignment> OpenAssignments { get; set; }
         public virtual DbSet<PirateDetail> PirateDetails { get; set; }

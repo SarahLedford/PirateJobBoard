@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="68fb0eed99d84546993e2eceadcd5048" Name="Diagram1">
         <EntityTypeShape EntityType="PirateJobBoardModel.Application" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PirateJobBoardModel.ApplicationStatus" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PirateJobBoardModel.ApplicationStatus" Width="2.25" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PirateJobBoardModel.Assignment" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PirateJobBoardModel.OpenAssignment" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PirateJobBoardModel.PirateDetail" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />

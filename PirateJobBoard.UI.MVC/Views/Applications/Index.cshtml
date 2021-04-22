@@ -6,58 +6,77 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CaptainNotes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ResumeFilename)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OpenAssignment.OpenAssignmentID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PirateDetail.FirstName)
-        </th>
-        <th></th>
-    </tr>
+@*<p>
+        @Html.ActionLink("", "Create")
+    </p>*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CaptainNotes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ResumeFilename)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OpenAssignment.OpenAssignmentID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PirateDetail.FirstName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ApplicationID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ApplicationID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ApplicationID })
-        </td>
-    </tr>
+@if (Model.Count() == 0)
+{
+    <h2 class="text-center">Ye haven't applied to anything yet!</h2>
 }
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CaptainNotes)
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Assignment
+            </th>
+            <th>
+                Ship
+            </th>
+            @if (!User.IsInRole("Crewmate"))
+            {
+                <th>Applicant</th>
+                <th>Resume</th>
+            }
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaptainNotes)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.ResumeFilename)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenAssignment.Assignment.AssignmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenAssignment.Ship.ShipName)
+            </td>
+            @if (!User.IsInRole("Crewmate"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.PirateDetail.FullName)
+                </td>
+                <td>
+                    <a href="~/Content/Resumes/@item.ResumeFilename" target="_blank">View</a>
+                </td>
+            }
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ApplicationID })
+            </td>
+        </tr>
+        }
+
+    </table>
+}

@@ -7,7 +7,6 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Application</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -26,16 +25,16 @@
             @Html.DisplayFor(model => model.CaptainNotes)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.ResumeFilename)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ResumeFilename)
-        </dd>
+        </dd>*@
 
         <dt>
-            @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
+            Status
         </dt>
 
         <dd>
@@ -43,20 +42,38 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OpenAssignment.OpenAssignmentID)
+            Assignment
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OpenAssignment.OpenAssignmentID)
+            @Html.DisplayFor(model => model.OpenAssignment.Assignment.AssignmentName)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.PirateDetail.FirstName)
+            Ship, Captain
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.PirateDetail.FirstName)
+            @Html.DisplayFor(model => model.OpenAssignment.Ship.ShipName),
+           
+            @Html.DisplayFor(model => model.OpenAssignment.Ship.PirateDetail.FullName)
         </dd>
+        
+        @if (!User.IsInRole("Crewmate"))
+        {
+            <dt>
+                Applicant
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PirateDetail.FullName)
+            </dd>
+            <dt>
+                Resume
+            </dt>
+            <dd>
+                <a href="~/Content/Resumes/@Model.ResumeFilename" target="_blank">View</a>
+            </dd>
+        }
+
 
     </dl>
 </div>

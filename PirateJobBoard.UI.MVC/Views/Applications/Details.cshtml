@@ -1,11 +1,14 @@
 ﻿@model PirateJobBoard.DATA.EF.Application
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Application Details";
 }
 
-<h2>Details</h2>
-
+<h2 class="my-4"><em>@Model.PirateDetail.FullName's</em> @ViewBag.Title @if(!User.IsInRole("Crewmate"))
+{
+    <a href="@Url.Action("Edit", "Applications", new { id = Model.ApplicationID })"><i class="fa fa-edit mx-2"></i></a>
+}
+    </h2>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -24,14 +27,6 @@
         <dd>
             @Html.DisplayFor(model => model.CaptainNotes)
         </dd>
-
-        @*<dt>
-                @Html.DisplayNameFor(model => model.ResumeFilename)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ResumeFilename)
-            </dd>*@
 
         <dt>
             Status
@@ -80,8 +75,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index", "Applications")" class="text-decoration-none"><i class="fa fa-arrow-left mx-2"></i> Go Back</a>
 </p>
 
 

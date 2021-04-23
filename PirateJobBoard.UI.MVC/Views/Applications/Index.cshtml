@@ -1,16 +1,13 @@
 ﻿@model IEnumerable<PirateJobBoard.DATA.EF.Application>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Applications";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-@*<p>
-        @Html.ActionLink("", "Create")
-    </p>*@
 
-@if (Model.Count() == 0)
+@if (Model.Count() == 0 && User.IsInRole("Crewmate"))
 {
     <h2 class="text-center">Ye haven't applied to anything yet!</h2>
 }
@@ -75,10 +72,13 @@ else
                         <a href="~/Content/Resumes/@item.ResumeFilename" target="_blank">View</a>
                     </td>
                 }
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ApplicationID })
-                </td>
+                    <td>
+                        @if (!User.IsInRole("Crewmate"))
+                        {
+                            <a href="@Url.Action("Edit", "Applications", new { id = item.ApplicationID })"><i class="fa fa-edit mx-2"></i></a>
+                        }
+                        <a href="@Url.Action("Details", "Applications", new { id = item.ApplicationID })"><i class="fa fa-info mx-2"></i></a>
+                    </td>
             </tr>
         }
 

@@ -4,79 +4,71 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2 class="my-4">@ViewBag.Title <em>@Model.PirateDetail.FullName's</em> Application</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ApplicationID)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.OpenAssignment.Assignment.AssignmentName, "Assignment", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.OpenAssignmentID)
-            @Html.DisplayFor(model => model.OpenAssignment.Assignment.AssignmentName)
-            @Html.ValidationMessageFor(model => model.OpenAssignmentID, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ApplicationID)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PirateDetail.FullName, "Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.PirateID)
-            @Html.DisplayFor(model => model.PirateDetail.FullName)
-            @Html.ValidationMessageFor(model => model.PirateID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ApplicationDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.ApplicationDate)
-            @Html.DisplayFor(model => model.ApplicationDate)
-            @Html.ValidationMessageFor(model => model.ApplicationDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CaptainNotes, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.CaptainNotes, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CaptainNotes, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ApplicationStatus, "ApplicationStatus", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.ApplicationStatu)
-            @Html.DropDownList("ApplicationStatus", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.ApplicationStatus, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @Html.HiddenFor(model => model.ResumeFilename)
-    @Html.ValidationMessageFor(model => model.ResumeFilename, "", new { @class = "text-danger" })
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.ResumeFilename, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.OpenAssignment.Assignment.AssignmentName, "Assignment", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ResumeFilename, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ResumeFilename, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.OpenAssignmentID)
+                @Html.DisplayFor(model => model.OpenAssignment.Assignment.AssignmentName)
+                @Html.ValidationMessageFor(model => model.OpenAssignmentID, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.PirateDetail.FullName, "Applicant", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.PirateID)
+                @Html.DisplayFor(model => model.PirateDetail.FullName)
+                @Html.ValidationMessageFor(model => model.PirateID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.ApplicationDate)
+                @Html.DisplayFor(model => model.ApplicationDate)
+                @Html.ValidationMessageFor(model => model.ApplicationDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CaptainNotes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CaptainNotes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CaptainNotes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicationStatus, "ApplicationStatus", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.ApplicationStatu)
+                @Html.DropDownList("ApplicationStatus", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ApplicationStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.ResumeFilename)
+        @Html.ValidationMessageFor(model => model.ResumeFilename, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary my-4" />
+            </div>
         </div>
     </div>
-</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        <a href="@Url.Action("Index", "Applications")" class="text-decoration-none"><i class="fa fa-arrow-left mx-2"></i> Go Back</a>
+    </div>

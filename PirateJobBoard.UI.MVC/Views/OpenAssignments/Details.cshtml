@@ -6,11 +6,15 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="my-4">
+    <em>@Model.Assignment.AssignmentName</em> @ViewBag.Title
+    @if (!User.IsInRole("Crewmate"))
+    {
+        <a href="@Url.Action("Edit", "OpenAssignments", new { id = Model.OpenAssignmentID })"><i class="fa fa-edit mx-2"></i></a>
+    }
+</h2>
 
 <div>
-    <h4>OpenAssignment</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Assignment.AssignmentName)
@@ -43,23 +47,24 @@
         string resume = db.PirateDetails.Find(pirateId).ResumeFilename;
         Application existingApplication = db.Applications.Where(x => x.PirateID == pirateId && x.OpenAssignmentID == Model.OpenAssignmentID).FirstOrDefault();
     }
-    @if (pirate.ResumeFilename == "")
+    @if (pirate.ResumeFilename == "" && User.IsInRole("Crewmate"))
     {
         <span>Ye need to upload a resume before you can apply!</span>
 
     }
-    else if (existingApplication != null)
+    else if (existingApplication != null && User.IsInRole("Crewmate"))
     {
         <span class="alert-warning">
             Ye have already applied to this position, matey. <br />
         </span>
-        <a href="@Url.Action("Details", "Applications", new { id = existingApplication.ApplicationID })">View</a>
+        <a href="@Url.Action("Details", "Applications", new { id = existingApplication.ApplicationID })">View Application</a>
     }
-    else
+    else if (User.IsInRole("Crewmate"))
     {
-        @Html.ActionLink("Apply!", "OneClickApply", new { id = Model.OpenAssignmentID }, htmlAttributes: new { @class = "btn btn-success" }) @:|
+        @Html.ActionLink("Apply!", "OneClickApply", new { id = Model.OpenAssignmentID }, htmlAttributes: new { @class = "btn btn-success" })
     }
     <br />
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OpenAssignmentID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <div class="my-2">
+        <a href="@Url.Action("Index", "OpenAssignments")" class="text-decoration-none my-4"><i class="fa fa-arrow-left mx-2"></i> Go Back</a>
+    </div>
 </p>

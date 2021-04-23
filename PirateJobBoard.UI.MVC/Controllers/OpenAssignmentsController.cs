@@ -24,7 +24,7 @@ namespace PirateJobBoard.UI.MVC.Controllers
             {
                 var openAssignmentsLoc = db.OpenAssignments.Where(x => x.Ship.CaptainID == userID).Include(o => o.Assignment).Include(o => o.Ship);
 
-                return View(openAssignmentsLoc);
+                return View(openAssignmentsLoc.ToList());
             }
             var openAssignments = db.OpenAssignments.Include(o => o.Assignment).Include(o => o.Ship);
             return View(openAssignments.ToList());
@@ -50,6 +50,14 @@ namespace PirateJobBoard.UI.MVC.Controllers
         [Authorize(Roles = "PirateLord, Captain")]
         public ActionResult Create()
         {
+            string userID = User.Identity.GetUserId();
+            if (User.IsInRole("Captain"))
+            {
+                var captainsShip = db.Ships.Where(x => x.CaptainID == userID).ToList();
+                ViewBag.AssignmentID = new SelectList(db.Assignments, "AssignmentID", "AssignmentName");
+                ViewBag.ShipID = new SelectList(captainsShip, "ShipID", "ShipName");
+                return View();
+            }
             ViewBag.AssignmentID = new SelectList(db.Assignments, "AssignmentID", "AssignmentName");
             ViewBag.ShipID = new SelectList(db.Ships, "ShipID", "ShipName");
 
@@ -70,6 +78,14 @@ namespace PirateJobBoard.UI.MVC.Controllers
                 db.OpenAssignments.Add(openAssignment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            string userID = User.Identity.GetUserId();
+            if (User.IsInRole("Captain"))
+            {
+                var captainsShip = db.Ships.Where(x => x.CaptainID == userID).ToList();
+                ViewBag.AssignmentID = new SelectList(db.Assignments, "AssignmentID", "AssignmentName");
+                ViewBag.ShipID = new SelectList(captainsShip, "ShipID", "ShipName");
+                return View(openAssignment);
             }
 
             ViewBag.AssignmentID = new SelectList(db.Assignments, "AssignmentID", "AssignmentName", openAssignment.AssignmentID);
@@ -110,12 +126,13 @@ namespace PirateJobBoard.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AssignmentID = new SelectList(db.Assignments, "AssignmentID", "AssignmentName", openAssignment.AssignmentID);
+            ViewBag.ShipID = new SelectList(db.Ships, "ShipID", "ShipName", openAssignment.ShipID);
             if (User.IsInRole("Captain"))
             {
                 return openAssignment.Ship.CaptainID == userID ? View(openAssignment) : View("Index");
             }
-            ViewBag.AssignmentID = new SelectList(db.Assignments, "AssignmentID", "AssignmentName", openAssignment.AssignmentID);
-            ViewBag.ShipID = new SelectList(db.Ships, "ShipID", "ShipName", openAssignment.ShipID);
+
             return View(openAssignment);
         }
 

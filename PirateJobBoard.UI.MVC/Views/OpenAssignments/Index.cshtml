@@ -3,14 +3,17 @@
 @using PirateJobBoard.DATA.EF;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Open Assignments";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (!User.IsInRole("Crewmate"))
+{
+    <h3>
+        <a href="@Url.Action("Create", "OpenAssignments")"><i class="fa fa-plus mx-2"></i></a>
+    </h3>
+}
 
 <table class="table table-hover text-center" id="openAssignments">
     <thead>
@@ -47,7 +50,8 @@
                 {
                     <span>Ye need to upload a resume before you can apply!</span>
                 }
-                else if (existingApplication != null)
+
+                else if (existingApplication != null && User.IsInRole("Crewmate"))
                 {
                     <span class="alert-warning">
                         Ye have already applied to this position, matey. <br />
@@ -59,13 +63,17 @@
                     @Html.ActionLink("Apply!", "OneClickApply", new { id = item.OpenAssignmentID }, htmlAttributes: new { @class = "btn btn-success" })
                 }
                 <br />
-                @Html.ActionLink("Assignment Details", "Details", new { id = item.OpenAssignmentID })
+                @*@Html.ActionLink("Assignment Details", "Details", new { id = item.OpenAssignmentID })*@
+                <a href="@Url.Action("Details", "OpenAssignments", new { id = item.OpenAssignmentID })"><i class="fa fa-info mx-2"></i></a>
+
 
                 @if (!User.IsInRole("Crewmate"))
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.OpenAssignmentID })
+                    <a href="@Url.Action("Edit", "OpenAssignments", new { id = item.OpenAssignmentID })"><i class="fa fa-edit mx-2"></i></a>
 
-                    @Html.ActionLink("Delete", "Delete", new { id = item.OpenAssignmentID })
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.OpenAssignmentID })*@
+                    <a href="@Url.Action("Delete", "OpenAssignments", new { id = item.OpenAssignmentID })"><i class="fa fa-trash mx-2"></i></a>
+
                 }
 
             </td>

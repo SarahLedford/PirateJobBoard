@@ -1,12 +1,12 @@
 ﻿@model PirateJobBoard.DATA.EF.ApplicationStatus
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Status";
 }
 
-<h2>Delete</h2>
+<h2>@ViewBag.Title</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3 class="bg-soft-danger">Ye will lose access to this here status forever unless ye craft a new one!</h3>
 <div>
     <h4>ApplicationStatus</h4>
     <hr />
@@ -29,12 +29,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+    <div class="form-actions no-color">
+        <a href="@Url.Action("Index", "ApplicationStatus")" class="text-decoration-none mx-2"><i class="fa fa-arrow-left mx-2"></i> Go Back</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </div>
     }
 </div>

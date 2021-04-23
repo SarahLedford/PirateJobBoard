@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<PirateJobBoard.DATA.EF.Assignment>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Assignments";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h3>
+    <a href="@Url.Action("Create", "Assignments")"><i class="fa fa-plus mx-2"></i></a>
+</h3>
 <table class="table table-hover text-center" id="assignments">
     <thead>
         <tr>
@@ -32,9 +32,9 @@
                 @Html.DisplayFor(modelItem => item.AssignmentDescription)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AssignmentID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AssignmentID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AssignmentID })
+                <a href="@Url.Action("Edit", "Assignments", new { id = item.AssignmentID })"><i class="fa fa-edit mx-2"></i></a>
+                <a href="@Url.Action("Details", "Assignments", new { id = item.AssignmentID })"><i class="fa fa-info mx-2"></i></a>
+                <a href="@Url.Action("Delete", "Assignments", new { id = item.AssignmentID })"><i class="fa fa-trash mx-2"></i></a>
             </td>
         </tr>
     }

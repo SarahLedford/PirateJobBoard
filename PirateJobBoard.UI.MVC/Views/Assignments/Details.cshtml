@@ -4,11 +4,8 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
+<h2 class="my-4"><em>@Model.AssignmentName</em> @ViewBag.Title <a href="@Url.Action("Edit", "Assignments", new { id = Model.AssignmentID })"><i class="fa fa-edit mx-2"></i></a></h2>
 <div>
-    <h4>Assignment</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.AssignmentName)
@@ -29,6 +26,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AssignmentID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index", "Assignments")" class="text-decoration-none"><i class="fa fa-arrow-left mx-2"></i> Go Back</a>
+
 </p>

@@ -58,6 +58,7 @@ namespace PirateJobBoard.DATA.EF//.Metadata
 
         [Display(Name = "Description")]
         [StringLength(250, ErrorMessage = "* Aye, there's only room for 250 characters!")]
+        [UIHint("MultilineText")]
         public string StatusDescription { get; set; }
     }
     #endregion
@@ -77,6 +78,7 @@ namespace PirateJobBoard.DATA.EF//.Metadata
 
         [Display(Name = "Description")]
         [StringLength(2000, ErrorMessage = "* Aye, there's only room for 2000 characters!")]
+        [UIHint("MultilineText")]
         public string AssignmentDescription { get; set; }
     }
 

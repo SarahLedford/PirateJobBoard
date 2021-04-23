@@ -1,5 +1,10 @@
-﻿using System.Web.Configuration;
+﻿using System;
+using System.Configuration;
+using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using PirateJobBoard.UI.MVC.Models;
 
 namespace PirateJobBoard.UI.MVC.Controllers
 {
@@ -23,17 +28,48 @@ namespace PirateJobBoard.UI.MVC.Controllers
         [HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            if (Request.IsAuthenticated)
+            {
+                ContactViewModel contactModelEmail = new ContactViewModel();
+                contactModelEmail.EmailAddress = User.Identity.GetUserName();
 
+                return View(contactModelEmail);
+            }
             return View();
         }
 
         [HttpPost]
-        public ActionResult Contact(int updateMe)
+        public ActionResult Contact(ContactViewModel contactModel)
         {
-            string emailServer = WebConfigurationManager.AppSettings["EmailServer"];            string emailPW = WebConfigurationManager.AppSettings["EmailPW"];            string emailUser = WebConfigurationManager.AppSettings["EmailUser"];            string emailToAddress = WebConfigurationManager.AppSettings["EmailToAddress"];
+            if (!ModelState.IsValid)
+            {
+                return View(contactModel);
+            }
+            string message = $"Ye have received a message from {contactModel.Name}<br /><br />" +
+                $"Subject: {contactModel.Subject}<br /><br />" +
+                $"Reply To: {contactModel.EmailAddress}<br /><br />" +
+                $"Message:<br />{contactModel.Message}";
 
-            return View();
+            MailMessage mm = new MailMessage(ConfigurationManager.AppSettings.Get("EmailUser"), ConfigurationManager.AppSettings.Get("EmailToAddress"), contactModel.Subject, message);
+
+            mm.IsBodyHtml = true;
+            mm.Priority = MailPriority.High;
+            mm.ReplyToList.Add(contactModel.EmailAddress);
+
+            SmtpClient client = new SmtpClient(ConfigurationManager.AppSettings.Get("EmailServer"));
+            client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings.Get("EmailUser"), ConfigurationManager.AppSettings.Get("EmailPW"));
+
+            try
+            {
+                client.Send(mm);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.EmailMessage = $"We're sorry. Your request could not be completed at this time. Please" +
+                    $" try again later. Error Message: {ex.StackTrace}.";
+                return View(contactModel);
+            }
+            return View("EmailConfirm", contactModel);
         }
     }
 }

@@ -183,6 +183,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -555,6 +556,7 @@
     <Content Include="Views\Ships\Index.cshtml" />
     <Content Include="Views\PirateDetails\Edit.cshtml" />
     <Content Include="Views\PirateDetails\Index.cshtml" />
+    <Content Include="Views\Home\EmailConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PirateJobBoard.DATA.EF\PirateJobBoard.DATA.EF.csproj">

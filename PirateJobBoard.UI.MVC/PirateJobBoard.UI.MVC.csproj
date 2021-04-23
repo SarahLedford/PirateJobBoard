@@ -236,6 +236,7 @@
     <Content Include="Content\assets\img\illustrations\programmer.png" />
     <Content Include="Content\assets\img\illustrations\search.png" />
     <Content Include="Content\assets\img\logo.png" />
+    <Content Include="Content\assets\img\PirateStockImges\ThumbsUpPirate.jpg" />
     <Content Include="Content\assets\js\bootstrap-navbar.js" />
     <Content Include="Content\assets\js\theme.js" />
     <Content Include="Content\assets\js\theme.min.js" />

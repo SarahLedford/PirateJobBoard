@@ -77,6 +77,16 @@ li {
 /*======================================================================*/
 /*==========================HOME INDEX==================================*/
 /*======================================================================*/
+
+.filteredLinksAssignments {
+    text-decoration: none !important;
+    transition: .5s;
+}
+
+    .filteredLinksAssignments:hover {
+        color: #006B60;
+    }
+
 .testText {
     min-height: 10.5em;
 }
@@ -110,7 +120,7 @@ div .parchment {
 
 .card {
     border: none;
-    background-color: floralwhite;
+    background-color: rgba(217, 206, 187, 0.81);
 }
 
 .hover-top:hover {

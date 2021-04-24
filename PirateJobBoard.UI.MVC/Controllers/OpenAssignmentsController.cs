@@ -17,16 +17,17 @@ namespace PirateJobBoard.UI.MVC.Controllers
         private PirateJobBoardEntities db = new PirateJobBoardEntities();
 
         // GET: OpenAssignments
-        public ActionResult Index()
+        public ActionResult Index(string assignmentName)
         {
             string userID = User.Identity.GetUserId();
             if (User.IsInRole("Captain"))
             {
-                var openAssignmentsLoc = db.OpenAssignments.Where(x => x.Ship.CaptainID == userID).Include(o => o.Assignment).Include(o => o.Ship);
+                //var openAssignmentsLoc = db.OpenAssignments.Where(x => x.Ship.CaptainID == userID).Include(o => o.Assignment).Include(o => o.Ship);
+                var openAssignmentsLoc = assignmentName == null ? db.OpenAssignments.Where(x => x.Ship.CaptainID == userID).Include(o => o.Assignment).Include(o => o.Ship) : db.OpenAssignments.Where(x => x.Ship.CaptainID == userID && x.Assignment.AssignmentName == assignmentName).Include(o => o.Assignment).Include(o => o.Ship);
 
                 return View(openAssignmentsLoc.ToList());
             }
-            var openAssignments = db.OpenAssignments.Include(o => o.Assignment).Include(o => o.Ship);
+            var openAssignments = assignmentName == null ? db.OpenAssignments.Include(o => o.Assignment).Include(o => o.Ship) : db.OpenAssignments.Where(x => x.Assignment.AssignmentName == assignmentName).Include(o => o.Assignment).Include(o => o.Ship);
             return View(openAssignments.ToList());
         }
 

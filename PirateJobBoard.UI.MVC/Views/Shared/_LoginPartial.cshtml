@@ -7,7 +7,7 @@
     PirateDetail currentPirate = db.PirateDetails.Where(p => p.PirateID == pirateID).FirstOrDefault();
 
     string pirateFN = "Guest";
-    string color = currentPirate.HasScurvy == true ? "#00ff00" : "black";
+    string color = currentPirate.HasScurvy == true ? "greenyellow; text-shadow: 0 0 5px black" : "black";
 
     if (currentPirate != null)
     {

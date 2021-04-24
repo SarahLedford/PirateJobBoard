@@ -65,6 +65,10 @@
     <section class="py-5">
         @*<div class="bg-holder d-none d-sm-block" style="background-image:url(../../Content/assets/img/PirateStockImges/woodGrain.jpg);background-position:right top;background-size:200px 320px;">
             </div>*@
+        @{
+            PirateJobBoard.DATA.EF.PirateJobBoardEntities db = new PirateJobBoard.DATA.EF.PirateJobBoardEntities();
+            var assignmentsFilter = db.Assignments.ToList();
+        }
         <!--/.bg-holder-->
         <div class="container">
             <div class="row justify-content-center">
@@ -75,72 +79,94 @@
             <div class="row flex-center h-100">
                 <div class="col-10 col-xl-9">
                     <div class="row">
-                        <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                            <div class="card h-100 hover-tilt parchment">
-                                <div class="text-center">
-                                    @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                                    <div class="card-body px-3">
-                                        <h6 class="fw-bold fs-1">Accounting</h6>
-                                        <p class="mb-0 card-text">100 open position</p>
+                        @foreach (var assignment in assignmentsFilter)
+                        {
+                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+                                <div class="card h-100 hover-tilt parchment">
+                                    <div class="text-center">
+                                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
+
+                                        <div class="card-body px-3">
+                                            <h6 class="fw-bold fs-1">@assignment.AssignmentName</h6>
+                                            <p class="mb-0 card-text">@assignment.AssignmentDescription</p>
+                                            <a href="@Url.Action("Index", "OpenAssignments", new { assignmentName = assignment.AssignmentName })" class="filteredLinksAssignments">
+                                                <p><em><strong>View Openings</strong></em></p>
+                                            </a>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                            <div class="card h-100 hover-tilt parchment">
-                                <div class="text-center">
-                                    @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                                    <div class="card-body px-3">
-                                        <h6 class="fw-bold fs-1">Accounting</h6>
-                                        <p class="mb-0 card-text">100 open position</p>
+
+                        }
+                        @*<a href="@Url.Action("CookPositions", "OpenAssignments")">
+                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+                                <div class="card h-100 hover-tilt parchment">
+                                    <div class="text-center">
+                                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />
+                                            <div class="card-body px-3">
+                                                <h6 class="fw-bold fs-1">Accounting</h6>
+                                                <p class="mb-0 card-text">100 open position</p>
+                                            </div>
+                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+                                                <div class="card h-100 hover-tilt parchment">
+                                                    <div class="text-center">
+                                                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
+                        @*<div class="card-body px-3">
+                                            <h6 class="fw-bold fs-1">Accounting</h6>
+                                            <p class="mb-0 card-text">100 open position</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                            <div class="card h-100 hover-tilt parchment">
-                                <div class="text-center">
-                                    @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                                    <div class="card-body px-3">
-                                        <h6 class="fw-bold fs-1">Accounting</h6>
-                                        <p class="mb-0 card-text">100 open position</p>
+                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+                                <div class="card h-100 hover-tilt parchment">
+                                    <div class="text-center">
+                                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
+                        @*<div class="card-body px-3">
+                                            <h6 class="fw-bold fs-1">Accounting</h6>
+                                            <p class="mb-0 card-text">100 open position</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                            <div class="card h-100 hover-tilt parchment">
-                                <div class="text-center">
-                                    @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                                    <div class="card-body px-3">
-                                        <h6 class="fw-bold fs-1">Accounting</h6>
-                                        <p class="mb-0 card-text">100 open position</p>
+                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+                                <div class="card h-100 hover-tilt parchment">
+                                    <div class="text-center">*@
+                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
+                        @*<div class="card-body px-3">
+                                            <h6 class="fw-bold fs-1">Accounting</h6>
+                                            <p class="mb-0 card-text">100 open position</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                            <div class="card h-100 hover-tilt parchment">
-                                <div class="text-center">
-                                    @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                                    <div class="card-body px-3">
-                                        <h6 class="fw-bold fs-1">Accounting</h6>
-                                        <p class="mb-0 card-text">100 open position</p>
+                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+                                <div class="card h-100 hover-tilt parchment">
+                                    <div class="text-center">*@
+                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
+                        @*<div class="card-body px-3">
+                                            <h6 class="fw-bold fs-1">Accounting</h6>
+                                            <p class="mb-0 card-text">100 open position</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                            <div class="card h-100 hover-tilt parchment">
-                                <div class="text-center">
-                                    @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                                    <div class="card-body px-3">
-                                        <h6 class="fw-bold fs-1">Accounting</h6>
-                                        <p class="mb-0 card-text">100 open position</p>
+                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+                                <div class="card h-100 hover-tilt parchment">
+                                    <div class="text-center">*@
+                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
+                        @* <div class="card-body px-3">
+                                            <h6 class="fw-bold fs-1">Accounting</h6>
+                                            <p class="mb-0 card-text">100 open position</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>*@
                         @*<div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
                                 <div class="card py-4 shadow-sm h-100 hover-top">
                                     <div class="text-center">
@@ -288,12 +314,12 @@
                                     </div>
                                 </div>
                             </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </section>
     <!-- Testimonials End ============================-->

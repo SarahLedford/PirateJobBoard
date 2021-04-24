@@ -237,6 +237,10 @@
     <Content Include="Content\assets\img\illustrations\programmer.png" />
     <Content Include="Content\assets\img\illustrations\search.png" />
     <Content Include="Content\assets\img\logo.png" />
+    <Content Include="Content\assets\img\LogoText.png" />
+    <Content Include="Content\assets\img\LogoWheel.png" />
+    <Content Include="Content\assets\img\LogoWheelCentered.png" />
+    <Content Include="Content\assets\img\lWnYHa01.svg" />
     <Content Include="Content\assets\img\PirateStockImges\e780fcc438ed465f86122b80f4700a4a.png" />
     <Content Include="Content\assets\img\PirateStockImges\HappyPirate.jpg" />
     <Content Include="Content\assets\img\PirateStockImges\JobsAhoyLogin.png" />

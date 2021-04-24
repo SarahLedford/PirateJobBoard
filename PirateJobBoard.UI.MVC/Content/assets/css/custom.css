@@ -1,6 +1,9 @@
-﻿body {
-    /*margin-top: 35vh;*/
+﻿/*======================================================================*/
+/*==========================LAYOUT======================================*/
+/*======================================================================*/
 
+body {
+    /*margin-top: 35vh;*/
 }
 
 .backdrop {
@@ -26,10 +29,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     z-index: 200;
 }
 
-.logoWheel:hover {
-    transform: rotate(360deg);
-    transition: 3s;
-}
+    .logoWheel:hover {
+        transform: rotate(360deg);
+        transition: 3s;
+    }
 
 .logoText {
     margin-left: -8.5em;
@@ -45,17 +48,35 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 li {
     margin-left: 1.75em;
 }
+
     li a {
         color: black;
     }
 
-/*.collapse:not(.show) {
-    display: list-item;
-    text-decoration: none;
-    list-style-type: none;
-    font-weight: 500;
-}*/
+#loginPartial {
+    margin-bottom: 1.75em;
+}
 
+    #loginPartial a {
+        text-decoration: none;
+    }
+
+        #loginPartial a:hover {
+            color: black;
+        }
+
+#navbarDropdown {
+    margin-bottom: 3em;
+}
+/*======================================================================*/
+/*==========================END LAYOUT==================================*/
+/*======================================================================*/
+
+
+
+/*======================================================================*/
+/*==========================HOME INDEX==================================*/
+/*======================================================================*/
 .testText {
     min-height: 10.5em;
 }
@@ -65,22 +86,7 @@ li {
     box-shadow: 0px 0px 15px 4px black;
 }
 
-#loginPartial{
-    margin-bottom: 1.75em;
-}
 
-#loginPartial a{
-    text-decoration: none;
-
-}
-
-#loginPartial a:hover{
-    color:black;
-}
-
-#navbarDropdown {
-    margin-bottom: 3em;
-}
 
 div .parchment {
     background: url(../img/PirateStockImges/parchment.png) center;
@@ -92,19 +98,21 @@ div .parchment {
     transition: 1s;
 }
 
-.hover-tilt:hover {
-    transform: rotateZ( 4deg );
-    transition: transform 1s;
-}
-.hover-tilt:hover:after {
-    transform: rotateZ( -2deg );
-    transition: transform 1s;
-}
-.card{
+    .hover-tilt:hover {
+        transform: rotateZ( 4deg );
+        transition: transform 1s;
+    }
+
+        .hover-tilt:hover:after {
+            transform: rotateZ( -2deg );
+            transition: transform 1s;
+        }
+
+.card {
     border: none;
-    background-color: none;
-    color: floralwhite;
+    background-color: floralwhite;
 }
+
 .hover-top:hover {
     border: none;
     background-color: transparent;
@@ -118,15 +126,26 @@ div .parchment {
 
 .indexTitles {
     text-shadow: -20px 0px 4px black;
-    color:floralwhite;
+    color: floralwhite;
 }
 
 #homeDescr2 {
     text-shadow: 20px 0px 4px black;
     color: floralwhite;
 }
+/*======================================================================*/
+/*==========================END HOME INDEX==============================*/
+/*======================================================================*/
 
+
+
+/*======================================================================*/
+/*==========================CONTACT=====================================*/
+/*======================================================================*/
 #contactForm {
     width: 50vw;
     margin-left: 20vw;
 }
+/*======================================================================*/
+/*==========================END CONTACT=================================*/
+/*======================================================================*/

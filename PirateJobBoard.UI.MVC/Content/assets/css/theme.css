@@ -3486,16 +3486,18 @@ fieldset:disabled .btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1F3A63;
-  border-color: #1F3A63;
+    color: #fff;
+    background-color: #006B60;
+    border-color: #006B60;
+    transition: 1s;
 }
 
-.btn-primary:hover {
-  color: #fff;
-  background-color: #1a3154;
-  border-color: #192e4f;
-}
+    .btn-primary:hover {
+        color: lightgray;
+        background-color: #004f45;
+        border-color: #004f45;
+        transition: 1s;
+    }
 
 .btn-check:focus + .btn-primary, .btn-primary:focus {
   color: #fff;
@@ -4864,8 +4866,8 @@ fieldset:disabled .btn {
 }
 
 .navbar-nav-scroll {
-  max-height: var(--bs-scroll-height, 75vh);
-  overflow-y: auto;
+  /*max-height: var(--bs-scroll-height, 75vh);
+  overflow-y: auto;*/
 }
 
 @media (min-width: 576px) {

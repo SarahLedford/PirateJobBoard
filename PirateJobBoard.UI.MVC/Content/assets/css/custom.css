@@ -1,22 +1,112 @@
-﻿body{
-    margin-top: 10vh;
+﻿body {
+    /*margin-top: 35vh;*/
+
+}
+
+.backdrop {
+    backdrop-filter: blur(0px) !important;
+    background-color: rgba(255, 232, 201, .53);
+    background-image: none;
+    padding: 0 0 0 0;
+    box-shadow: 0 0 20px 10px #000000;
+    margin-bottom: 3em;
 }
 
 main {
     padding: 0 2em 0 2em;
 }
 
-li{
-    margin-left:1.75em;
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    color: #006B60;
+}
+#wrapper-div {
+    background-color: white;
+    box-shadow: 0 3px 20px 2px black;
+    padding: 2em;
 }
 
-.collapse:not(.show) {
+
+li {
+    margin-left: 1.75em;
+}
+    li a {
+        color: black;
+    }
+
+/*.collapse:not(.show) {
     display: list-item;
     text-decoration: none;
     list-style-type: none;
     font-weight: 500;
+}*/
+
+.imageBlur {
+    border-radius: 50em;
+    box-shadow: 0px 0px 15px 4px black;
 }
 
-#footer {
-    margin-top: 46.5vh;
+#loginPartial{
+    margin-bottom: 1.75em;
+}
+
+#loginPartial a{
+    text-decoration: none;
+
+}
+
+#loginPartial a:hover{
+    color:black;
+}
+
+#navbarDropdown {
+    margin-bottom: 3em;
+}
+
+div .parchment {
+    background: url(../img/PirateStockImges/parchment.png) center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hover-tilt {
+    transition: 1s;
+}
+
+.hover-tilt:hover {
+    transform: rotateZ( 4deg );
+    transition: transform 1s;
+}
+.hover-tilt:hover:after {
+    transform: rotateZ( -2deg );
+    transition: transform 1s;
+}
+.card{
+    border: none;
+    background-color: none;
+    color: floralwhite;
+}
+.hover-top:hover {
+    border: none;
+    background-color: transparent;
+    color: black;
+}
+
+.card-body {
+    padding-top: 3em;
+    margin-top: 1em;
+}
+
+.indexTitles {
+    text-shadow: -20px 0px 4px black;
+    color:floralwhite;
+}
+
+#homeDescr2 {
+    text-shadow: 20px 0px 4px black;
+    color: floralwhite;
+}
+
+#contactForm {
+    width: 50vw;
+    margin-left: 20vw;
 }

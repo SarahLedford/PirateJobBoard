@@ -27,62 +27,53 @@
     <link href="~/Content/assets/css/custom.css" rel="stylesheet" />
 </head>
 
-<body>
+<body style="background-image:url(../../Content/assets/img/PirateStockImges/woodGrain.jpg); background-repeat:round;">
     <!-- ===============================================-->
     <!--    Main Content-->
     <!-- ===============================================-->
+    @* fixed-top  *@
     <main class="main" id="top">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 backdrop" data-navbar-on-scroll="data-navbar-on-scroll">
+        <nav class="navbar navbar-expand-lg navbar-light py-3 backdrop" data-navbar-on-scroll="data-navbar-on-scroll">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center fw-bolder fs-2 fst-italic" href="@Url.Action("Index", "Home")">
-                    <div class="text-info">Jobs</div>
-                    <div class="text-warning">Ahoy!</div>
+                    <img src="~/Content/assets/img/PirateStockImges/JobsAhoyLogo.png" />
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                @*<button class="" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                @*<button class="" type="button" data-bs-toggle="collapse" data-bs-target="#navbardropdown" aria-controls="navbarnavdarkdropdown" aria-expanded="false" aria-label="toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>*@
                 <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-                        <li class="nav-item px-2"><a class="nav-link fw-medium" href="@Url.Action("Index", "OpenAssignments")">Open Assignments</a></li>
-                        <li class="nav-item px-2"><a class="nav-link fw-medium" href="@Url.Action("Index", "Applications")">Applications</a></li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li class="nav-item px-2"><a class="nav-link fw-bolder" href="@Url.Action("Index", "OpenAssignments")">Open Assignments</a></li>
+                            <li class="nav-item px-2"><a class="nav-link fw-bolder" href="@Url.Action("Index", "Applications")">Applications</a></li>
+                        }
+
                         @if (Request.IsAuthenticated && User.IsInRole("Crewmate"))
                         {
-                            <li class="nav-item px-2"><a class="nav-link fw-medium" href="@Url.Action("Index", "PirateDetails")">Yer Profile</a></li>
-                            @*<li class="collapse navbar-collapse nav-item px-2" id="navbarDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown nav-item px-2">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Yer Profile
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Index", "PirateDetails")">View</a></li>
-                            <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Edit", "PirateDetails", new { id = PirateJobBoard.DAT })">Edit</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>*@
+                            <li class="nav-item px-2"><a class="nav-link fw-bolder" href="@Url.Action("Index", "PirateDetails")">Yer Profile</a></li>
                         }
                         @if (Request.IsAuthenticated && User.IsInRole("PirateLord"))
                         {
                             <li class="collapse navbar-collapse nav-item px-2" id="navbarDropdown">
                                 <ul class="navbar-nav">
                                     <li class="nav-item dropdown nav-item px-2">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a class="nav-link dropdown-toggle fw-bolder" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Lordly Duties
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
-                                            <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Index", "Ships")">Ships</a></li>
-                                            <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Index", "Assignments")">Assignments</a></li>
-                                            <li><a class="dropdown-item nav-link fw-medium" href="@Url.Action("Index", "ApplicationStatus")">Application Statuses</a></li>
-                                            <li>@Html.ActionLink("Roles", "Index", "RolesAdmin", null, new { @class = "dropdown-item nav-link fw-medium" })</li>
-                                            <li>@Html.ActionLink("Users", "Index", "UsersAdmin", null, new { @class = "dropdown-item nav-link fw-medium" })</li>
+                                            <li><a class="dropdown-item nav-link fw-bolder" href="@Url.Action("Index", "Ships")">Ships</a></li>
+                                            <li><a class="dropdown-item nav-link fw-bolder" href="@Url.Action("Index", "Assignments")">Assignments</a></li>
+                                            <li><a class="dropdown-item nav-link fw-bolder" href="@Url.Action("Index", "ApplicationStatus")">Application Statuses</a></li>
+                                            <li>@Html.ActionLink("Roles", "Index", "RolesAdmin", null, new { @class = "dropdown-item nav-link fw-bolder" })</li>
+                                            <li>@Html.ActionLink("Users", "Index", "UsersAdmin", null, new { @class = "dropdown-item nav-link fw-bolder" })</li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
                         }
-                        <li class="nav-item px-2"><a class="nav-link fw-medium" href="@Url.Action("Contact", "Home")">Contact</a></li>
+                        <li class="nav-item px-2"><a class="nav-link fw-bolder" href="@Url.Action("Contact", "Home")">Contact</a></li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -93,7 +84,11 @@
 
             </div>
         </div>
-        @RenderBody()
+        @RenderSection("homeIndex", false)
+        @{ var styling = RenderSection("homeIndex", false) == null ? null : "display:none"; }
+        <div id="wrapper-div" style="@styling">
+            @RenderBody()
+        </div>
 
 
     </main>
@@ -101,8 +96,8 @@
         <!-- Footer ============================-->
         <!-- ============================================-->
 
-        <section class="py-0 bg-primary-gradient" id="footer">
-            <div class="bg-holder" style="background-image:url(../../Content/assets/img/illustrations/footer-bg.png);background-position:center;background-size:cover;">
+        <section class="py-0" id="footer">
+            <div class="bg-holder">
             </div>
             <!--/.bg-holder-->
             <div class="container">
@@ -223,10 +218,10 @@
     <script src="~/Content/vendors/bootstrap/bootstrap.min.js"></script>
     <script src="~/Content/vendors/is/is.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="~/Content/vendors/fontawesome/all.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="~/Content/vendors/fontawesome/all.min.js"></script>
     <script src="~/Content/assets/js/theme.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap" rel="stylesheet">
     @RenderSection("scripts", false)

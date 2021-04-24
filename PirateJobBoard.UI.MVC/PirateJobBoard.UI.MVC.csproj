@@ -237,7 +237,18 @@
     <Content Include="Content\assets\img\illustrations\programmer.png" />
     <Content Include="Content\assets\img\illustrations\search.png" />
     <Content Include="Content\assets\img\logo.png" />
+    <Content Include="Content\assets\img\PirateStockImges\e780fcc438ed465f86122b80f4700a4a.png" />
+    <Content Include="Content\assets\img\PirateStockImges\HappyPirate.jpg" />
+    <Content Include="Content\assets\img\PirateStockImges\JobsAhoyLogin.png" />
+    <Content Include="Content\assets\img\PirateStockImges\JobsAhoyLogo.png" />
+    <Content Include="Content\assets\img\PirateStockImges\laughing_pirate.jpg" />
+    <Content Include="Content\assets\img\PirateStockImges\ocean.jpeg" />
+    <Content Include="Content\assets\img\PirateStockImges\parchment.png" />
+    <Content Include="Content\assets\img\PirateStockImges\seriousPirate.jpg" />
+    <Content Include="Content\assets\img\PirateStockImges\thoughtfulPirate.jpg" />
     <Content Include="Content\assets\img\PirateStockImges\ThumbsUpPirate.jpg" />
+    <Content Include="Content\assets\img\PirateStockImges\womanPirate.jpg" />
+    <Content Include="Content\assets\img\PirateStockImges\woodGrain.jpg" />
     <Content Include="Content\assets\js\bootstrap-navbar.js" />
     <Content Include="Content\assets\js\theme.js" />
     <Content Include="Content\assets\js\theme.min.js" />
@@ -299,8 +310,6 @@
     <Content Include="Content\assets\img\.gitkeep" />
     <Content Include="Content\assets\img\favicons\manifest.json" />
     <Content Include="Content\assets\img\favicons\site.webmanifest" />
-    <Content Include="Content\assets\js\theme.js.map" />
-    <Content Include="Content\assets\js\theme.min.js.map" />
     <Content Include="Content\assets\video\.gitkeep" />
     <Content Include="Content\vendors\bootstrap\bootstrap.min.js.map" />
     <Content Include="Web.config" />
@@ -531,6 +540,8 @@
     <Folder Include="_Archive\jobest\src\pug\pages\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\js\theme.js.map" />
+    <Content Include="Content\assets\js\theme.min.js.map" />
     <None Include="packages.config" />
     <Content Include="Views\Applications\Details.cshtml" />
     <Content Include="Views\Applications\Edit.cshtml" />

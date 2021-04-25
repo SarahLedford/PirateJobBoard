@@ -53,6 +53,39 @@ li {
         color: black;
     }
 
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+    transition: .75s;
+    background: inherit;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: floralwhite;
+    text-shadow: 0px 0px 5px black;
+    transition: .5s;
+}
+
+#loginHover {
+    color: black;
+    transition: .75s;
+}
+
+    #loginHover:hover {
+        color: floralwhite;
+        text-shadow: 0px 0px 5px black;
+        transition: .5s;
+    }
+
+.lordlyDuties {
+    padding-top: 14px;
+    margin-top: -2.1em;
+}
+
+.dropdown-menu {
+    background: #006b6087;
+    box-shadow: 0 0 9px 0px black;
+}
+
 #loginPartial {
     margin-bottom: 1.75em;
 }
@@ -60,10 +93,6 @@ li {
     #loginPartial a {
         text-decoration: none;
     }
-
-        #loginPartial a:hover {
-            color: black;
-        }
 
 #navbarDropdown {
     margin-bottom: 3em;

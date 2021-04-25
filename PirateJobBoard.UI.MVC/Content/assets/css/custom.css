@@ -116,8 +116,12 @@ li {
         color: #006B60;
     }
 
+/*.testCards {
+    min-width:21em;
+}*/
+
 .testText {
-    min-height: 10.5em;
+    min-height: 21em;
 }
 
 .imageBlur {

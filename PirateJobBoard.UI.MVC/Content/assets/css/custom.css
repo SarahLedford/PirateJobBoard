@@ -59,11 +59,11 @@ li {
     background: inherit;
 }
 
-.navbar-light .navbar-nav .nav-link:hover {
-    color: floralwhite;
-    text-shadow: 0px 0px 5px black;
-    transition: .5s;
-}
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: floralwhite;
+        text-shadow: 0px 0px 5px black;
+        transition: .5s;
+    }
 
 #loginHover {
     color: black;
@@ -96,6 +96,11 @@ li {
 
 #navbarDropdown {
     margin-bottom: 3em;
+}
+
+/*Width for Datatables.net seach bar*/
+input[type="search"] {
+    max-width: 10em;
 }
 /*======================================================================*/
 /*==========================END LAYOUT==================================*/

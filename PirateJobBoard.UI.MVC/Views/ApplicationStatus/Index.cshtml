@@ -43,7 +43,9 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $('#statuses').DataTable();
+            $('#statuses').DataTable({
+                responsive: true
+            });
         });
     </script>
 }

@@ -84,7 +84,9 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $('#openAssignments').DataTable();
+            $('#openAssignments').DataTable({
+                responsive: true
+            });
         });
     </script>
 }

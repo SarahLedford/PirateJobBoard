@@ -72,13 +72,13 @@ else
                         <a href="~/Content/Resumes/@item.ResumeFilename" target="_blank">View</a>
                     </td>
                 }
-                    <td>
-                        @if (!User.IsInRole("Crewmate"))
-                        {
-                            <a href="@Url.Action("Edit", "Applications", new { id = item.ApplicationID })"><i class="fa fa-edit mx-2"></i></a>
-                        }
-                        <a href="@Url.Action("Details", "Applications", new { id = item.ApplicationID })"><i class="fa fa-info mx-2"></i></a>
-                    </td>
+                <td>
+                    @if (!User.IsInRole("Crewmate"))
+                    {
+                        <a href="@Url.Action("Edit", "Applications", new { id = item.ApplicationID })"><i class="fa fa-edit mx-2"></i></a>
+                    }
+                    <a href="@Url.Action("Details", "Applications", new { id = item.ApplicationID })"><i class="fa fa-info mx-2"></i></a>
+                </td>
             </tr>
         }
 

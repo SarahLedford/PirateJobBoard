@@ -2,15 +2,6 @@
     ViewBag.Title = "Home Page";
 }
 @section homeIndex{
-    <section class="py-0" id="home">
-        <div class="bg-holder d-none d-sm-block" style="background-image:url(../../Content/assets/img/illustrations/hero-bg.png);background-position:right top;background-size:contain;">
-        </div>
-        <!--/.bg-holder-->
-        <div class="bg-holder d-sm-none" style="background-image:url(../../Content/assets/img/illustrations/hero-bg.png);background-position:right top;background-size:contain;">
-        </div>
-        <!--/.bg-holder-->
-
-    </section>
 
     <!-- ============================================-->
     <!-- <section> begin ============================-->
@@ -22,7 +13,7 @@
             <section class="py-7 mt-6">
                 <div class="container">
                     <div class="row flex-center">
-                        <div class="col-md-5 order-md-1 text-center text-md-end"><img class="img-fluid mb-4 imageBlur" src="~/Content/assets/img/PirateStockImges/laughing_pirate.jpg" width="450" alt="Laughing Pirate" /></div>
+                        <div class="col-md-5 order-md-1 text-center text-md-end"><img class="img-fluid mb-4 imageBlur" src="~/Content/assets/img/PirateStockImges/laughing_pirate.jpg" width="450" alt="Laughing Pirate" longdesc="Picture of a laughing pirate standing at his desk" /></div>
                         <div class="col-md-5 text-center text-md-start">
                             <h6 id="homeDescr" class="fw-bold fs-2 fs-lg-3 display-3 lh-sm indexTitles">Yer number one choice <br>for finding yer new favorite post</h6>
                         </div>
@@ -44,7 +35,7 @@
             <section class="py-7">
                 <div class="container">
                     <div class="row flex-center">
-                        <div class="col-md-5 mx-4 text-center text-md-end"><img class="img-fluid mb-4 imageBlur" src="~/Content/assets/img/PirateStockImges/thoughtfulPirate.jpg" width="450" alt="Thoughtful Pirate" /></div>
+                        <div class="col-md-5 mx-4 text-center text-md-end"><img class="img-fluid mb-4 imageBlur" src="~/Content/assets/img/PirateStockImges/thoughtfulPirate.jpg" width="450" alt="Thoughtful Pirate" longdesc="Picture of a pirate lost in thought"/></div>
                         <div class="col-md-5 text-center text-md-start">
                             <h6 id="homeDescr2" class="fw-bold fs-2 fs-lg-3 display-3 lh-sm indexTitles">Grow yer skills in <br>a new, exciting environment</h6>
                         </div>
@@ -63,8 +54,6 @@
     <!-- Categories ============================-->
     <!-- ============================================-->
     <section class="py-5">
-        @*<div class="bg-holder d-none d-sm-block" style="background-image:url(../../Content/assets/img/PirateStockImges/woodGrain.jpg);background-position:right top;background-size:200px 320px;">
-            </div>*@
         @{
             PirateJobBoard.DATA.EF.PirateJobBoardEntities db = new PirateJobBoard.DATA.EF.PirateJobBoardEntities();
             var assignmentsFilter = db.Assignments.ToList();
@@ -84,8 +73,6 @@
                             <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
                                 <div class="card h-100 hover-tilt parchment">
                                     <div class="text-center">
-                                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-
                                         <div class="card-body px-3">
                                             <h6 class="fw-bold fs-1">@assignment.AssignmentName</h6>
                                             <p class="mb-0 card-text">@assignment.AssignmentDescription</p>
@@ -98,86 +85,7 @@
                                 </div>
                             </div>
 
-                        }
-                        @*<a href="@Url.Action("CookPositions", "OpenAssignments")">
-                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                                <div class="card h-100 hover-tilt parchment">
-                                    <div class="text-center">
-                                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />
-                                            <div class="card-body px-3">
-                                                <h6 class="fw-bold fs-1">Accounting</h6>
-                                                <p class="mb-0 card-text">100 open position</p>
-                                            </div>
-                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                                                <div class="card h-100 hover-tilt parchment">
-                                                    <div class="text-center">
-                                                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                        @*<div class="card-body px-3">
-                                            <h6 class="fw-bold fs-1">Accounting</h6>
-                                            <p class="mb-0 card-text">100 open position</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                                <div class="card h-100 hover-tilt parchment">
-                                    <div class="text-center">
-                                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                        @*<div class="card-body px-3">
-                                            <h6 class="fw-bold fs-1">Accounting</h6>
-                                            <p class="mb-0 card-text">100 open position</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                                <div class="card h-100 hover-tilt parchment">
-                                    <div class="text-center">*@
-                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                        @*<div class="card-body px-3">
-                                            <h6 class="fw-bold fs-1">Accounting</h6>
-                                            <p class="mb-0 card-text">100 open position</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                                <div class="card h-100 hover-tilt parchment">
-                                    <div class="text-center">*@
-                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                        @*<div class="card-body px-3">
-                                            <h6 class="fw-bold fs-1">Accounting</h6>
-                                            <p class="mb-0 card-text">100 open position</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                                <div class="card h-100 hover-tilt parchment">
-                                    <div class="text-center">*@
-                        @*<img src="~/Content/assets/img/PirateStockImges/parchment.png" height="120" alt="" />*@
-                        @* <div class="card-body px-3">
-                                            <h6 class="fw-bold fs-1">Accounting</h6>
-                                            <p class="mb-0 card-text">100 open position</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
-                        @*<div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
-                                <div class="card py-4 shadow-sm h-100 hover-top">
-                                    <div class="text-center">
-                                        <img src="~/Content/assets/img/illustrations/consultancy.png" height="120" alt="" />
-                                        <div class="card-body px-2">
-                                            <h6 class="fw-bold fs-1 heading-color">Consultancy</h6>
-                                            <p class="mb-0 card-text">100 open position</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
+                        }                       
                     </div>
                 </div>
             </div>
@@ -191,9 +99,8 @@
         <div class="container-lg">
             <div class="row flex-center">
                 <div class="col-md-11 col-lg-6 col-xl-4 col-xxl-5">
-                    <h6 class="fs-3 fs-lg-4 lh-sm indexTitles">Testimonials</h6>
+                    <h6 class="fs-3 fs-lg-4 lh-sm indexTitles text-center">Testimonials</h6>
                 </div>
-                @*<div class="col-lg-4 position-relative mt-n5 mt-md-n4"><a class="carousel-control-prev carousel-icon z-index-2" href="#carouselExampleDark" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next carousel-icon z-index-2" href="#carouselExampleDark" role="button" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></a></div>*@
             </div>
             <div class="row flex-center">
                 <div class="col-xl-10 px-0">
@@ -203,7 +110,7 @@
                                 <div class="row h-100 m-lg-7 mx-3 mt-6 mx-md-4 my-md-7">
                                     <div class="col-md-4 mb-8 mb-md-0">
                                         <div class="card card-span h-100 shadow-lg testCards">
-                                            <div class="card-span-img"><img class="testImage" src="~/Content/assets/img/PirateStockImges/HappyPirate.jpg" height="140" width="140" style="border-radius:50em" alt="Happy Pirate Testimonial" /></div>
+                                            <div class="card-span-img"><img class="testImage" src="~/Content/assets/img/PirateStockImges/HappyPirate.jpg" height="140" width="140" style="border-radius:50em" alt="Happy Pirate Testimonial Image" longdesc="Happy pirate posing for a picture" /></div>
                                             <div class="card-body d-flex flex-column flex-center py-6">
                                                 <div class="my-4">
                                                     <ul class="list-unstyled list-inline">
@@ -241,7 +148,7 @@
                                     </div>
                                     <div class="col-md-4 mb-8 mb-md-0">
                                         <div class="card card-span h-100 shadow-lg testCards">
-                                            <div class="card-span-img"><img class="testImage" src="~/Content/assets/img/PirateStockImges/womanPirate.jpg" style="border-radius:50em;" alt="Pirate Testimonial Lady" /></div>
+                                            <div class="card-span-img"><img class="testImage" src="~/Content/assets/img/PirateStockImges/womanPirate.jpg" style="border-radius:50em;" alt="Pirate Testimonial Lady" longdesc="Female pirate talking about how pleased she is with her experience at Jobs Ahoy" /></div>
                                             <div class="card-body d-flex flex-column flex-center py-6">
                                                 <div class="my-4">
                                                     <ul class="list-unstyled list-inline">
@@ -280,7 +187,7 @@
                                     </div>
                                     <div class="col-md-4 mb-8 mb-md-0">
                                         <div class="card card-span h-100 shadow-lg testCards">
-                                            <div class="card-span-img"><img class="testImage" src="~/Content/assets/img/PirateStockImges/seriousPirate.jpg" style="border-radius:50em;" alt="Serious Pirate Testimonial" /></div>
+                                            <div class="card-span-img"><img class="testImage" src="~/Content/assets/img/PirateStockImges/seriousPirate.jpg" style="border-radius:50em;" alt="Serious Pirate Testimonial" longdesc="A serious-looking pirate talking about how pleased he is with his experience at Jobs Ahoy" /></div>
                                             <div class="card-body d-flex flex-column flex-center py-6">
                                                 <div class="my-4">
                                                     <ul class="list-unstyled list-inline">

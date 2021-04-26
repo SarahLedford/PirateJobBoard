@@ -194,6 +194,7 @@
     <Content Include="android-chrome-512x512.png" />
     <Content Include="apple-touch-icon.png" />
     <Content Include="Content\assets\css\custom.css" />
+    <Content Include="Content\assets\css\custom.min.css" />
     <Content Include="Content\assets\css\theme-rtl.css" />
     <Content Include="Content\assets\css\theme-rtl.min.css" />
     <Content Include="Content\assets\css\theme.css" />

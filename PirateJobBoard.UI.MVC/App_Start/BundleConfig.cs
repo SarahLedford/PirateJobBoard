@@ -25,11 +25,11 @@ namespace PirateJobBoard.UI.MVC
                       "~/Content/vendors/fontawesome/all.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/postCDN").Include(
-                      "~/Content/assets/js/theme.js"));
+                      "~/Content/assets/js/theme.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/assets/css/theme.css",
-                      "~/Content/assets/css/custom.css"));
+                      "~/Content/assets/css/theme.min.css",
+                      "~/Content/assets/css/custom.min.css"));
 
             
         }

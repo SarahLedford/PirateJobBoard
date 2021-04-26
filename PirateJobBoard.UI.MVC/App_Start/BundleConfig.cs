@@ -18,13 +18,20 @@ namespace PirateJobBoard.UI.MVC
             //bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
             //            "~/Scripts/modernizr-*"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-            //          "~/Scripts/bootstrap.js",
-            //          "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/preCDN").Include(
+                      "~/Content/vendors/popperjs/popper.min.js",
+                      "~/Content/vendors/bootstrap/bootstrap.min.js",
+                      "~/Content/vendors/is/is.min.js",
+                      "~/Content/vendors/fontawesome/all.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/postCDN").Include(
+                      "~/Content/assets/js/theme.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/assets/css/theme.css",
+                      "~/Content/assets/css/custom.css"));
+
+            
         }
     }
 }

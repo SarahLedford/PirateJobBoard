@@ -16,17 +16,13 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    @*<meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
-        <meta name="theme-color" content="#ffffff">*@
 
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
-    @*<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />*@
     <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/theme.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/custom.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
 </head>
 
 <body style="background-image:url(../../Content/assets/img/PirateStockImges/woodGrain.jpg); background-repeat:round;">
@@ -144,17 +140,13 @@
     <!-- ===============================================-->
     <!--    JavaScript -->
     <!-- ===============================================-->
-    <script src="~/Content/vendors/popperjs/popper.min.js"></script>
-    <script src="~/Content/vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="~/Content/vendors/is/is.min.js"></script>
+    @Scripts.Render("~/bundles/preCDN")
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="~/Content/vendors/fontawesome/all.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    @*<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>*@
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-    <script src="~/Content/assets/js/theme.js"></script>
+    @Scripts.Render("~/bundles/postCDN")
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap" rel="stylesheet">
     @RenderSection("scripts", false)
 </body>

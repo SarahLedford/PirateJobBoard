@@ -1,6 +1,19 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@section ScrollAnimation{
+    <script>
+        ScrollReveal().reveal('.highlights', { interval: 16, reset: true });
+        ScrollReveal().reveal('.indexTitles', { interval: 16, reset: true });
+        ScrollReveal().reveal('.testimonial', { interval: 16, reset: true });
+        ScrollReveal().reveal('.category1', { interval: 16, reset: true, delay: 100 });
+        ScrollReveal().reveal('.category2', { interval: 16, reset: true, delay: 300 });
+        ScrollReveal().reveal('.category3', { interval: 16, reset: true, delay: 400 });
+        ScrollReveal().reveal('.category4', { interval: 16, reset: true, delay: 500 });
+        ScrollReveal().reveal('.category5', { interval: 16, reset: true, delay: 600 });
+        ScrollReveal().reveal('.category6', { interval: 16, reset: true, delay: 700 });
+    </script>
+}
 @section homeIndex{
 
     <!-- ============================================-->
@@ -32,10 +45,10 @@
 
             <!-- ============================================-->
             <!-- <section> begin ============================-->
-            <section class="py-7">
+            <section class="py-7 highlights">
                 <div class="container">
                     <div class="row flex-center">
-                        <div class="col-md-5 mx-4 text-center text-md-end"><img class="img-fluid mb-4 imageBlur" src="~/Content/assets/img/PirateStockImges/thoughtfulPirate.jpg" width="450" alt="Thoughtful Pirate" longdesc="Picture of a pirate lost in thought"/></div>
+                        <div class="col-md-5 mx-4 text-center text-md-end"><img class="img-fluid mb-4 imageBlur highlights" src="~/Content/assets/img/PirateStockImges/thoughtfulPirate.jpg" width="450" alt="Thoughtful Pirate" longdesc="Picture of a pirate lost in thought" /></div>
                         <div class="col-md-5 text-center text-md-start">
                             <h6 id="homeDescr2" class="fw-bold fs-2 fs-lg-3 display-3 lh-sm indexTitles">Grow yer skills in <br>a new, exciting environment</h6>
                         </div>
@@ -68,9 +81,13 @@
             <div class="row flex-center h-100">
                 <div class="col-10 col-xl-9">
                     <div class="row">
+                        @{ int num = 0;
+                            string category = $"category{(num++)}";
+                            }
                         @foreach (var assignment in assignmentsFilter)
                         {
-                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+                            category = $"category{(num++)}";
+                            <div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4 @category">
                                 <div class="card h-100 hover-tilt parchment">
                                     <div class="text-center">
                                         <div class="card-body px-3">
@@ -85,7 +102,7 @@
                                 </div>
                             </div>
 
-                        }                       
+                        }
                     </div>
                 </div>
             </div>
@@ -108,7 +125,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active" data-bs-interval="10000">
                                 <div class="row h-100 m-lg-7 mx-3 mt-6 mx-md-4 my-md-7">
-                                    <div class="col-md-4 mb-8 mb-md-0">
+                                    <div class="col-md-4 mb-8 mb-md-0 testimonial">
                                         <div class="card card-span h-100 shadow-lg testCards">
                                             <div class="card-span-img"><img class="testImage" src="~/Content/assets/img/PirateStockImges/HappyPirate.jpg" height="140" width="140" style="border-radius:50em" alt="Happy Pirate Testimonial Image" longdesc="Happy pirate posing for a picture" /></div>
                                             <div class="card-body d-flex flex-column flex-center py-6">
@@ -142,11 +159,12 @@
                                                     </ul>
                                                 </div>
                                                 <p class="card-text text-center text-1000 px-4 testText">
-                                                    I was tired of findin' meself hauling booty to and fro. I knew in me heart I were meant for more... noble pursuits. <em>Jobs Ahoy</em> taught me to read and now I be the best First Mate in the 7 seas.</p>
+                                                    I was tired of findin' meself hauling booty to and fro. I knew in me heart I were meant for more... noble pursuits. <em>Jobs Ahoy</em> taught me to read and now I be the best First Mate in the 7 seas.
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mb-8 mb-md-0">
+                                    <div class="col-md-4 mb-8 mb-md-0 testimonial">
                                         <div class="card card-span h-100 shadow-lg testCards">
                                             <div class="card-span-img"><img class="testImage" src="~/Content/assets/img/PirateStockImges/womanPirate.jpg" style="border-radius:50em;" alt="Pirate Testimonial Lady" longdesc="Female pirate talking about how pleased she is with her experience at Jobs Ahoy" /></div>
                                             <div class="card-body d-flex flex-column flex-center py-6">
@@ -185,7 +203,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mb-8 mb-md-0">
+                                    <div class="col-md-4 mb-8 mb-md-0 testimonial">
                                         <div class="card card-span h-100 shadow-lg testCards">
                                             <div class="card-span-img"><img class="testImage" src="~/Content/assets/img/PirateStockImges/seriousPirate.jpg" style="border-radius:50em;" alt="Serious Pirate Testimonial" longdesc="A serious-looking pirate talking about how pleased he is with his experience at Jobs Ahoy" /></div>
                                             <div class="card-body d-flex flex-column flex-center py-6">

@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
     <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
+
+
 </head>
 
 <body style="background-image:url(../../Content/assets/img/PirateStockImges/woodGrain.jpg); background-repeat:round;">
@@ -148,6 +150,9 @@
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     @Scripts.Render("~/bundles/postCDN")
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    @RenderSection("ScrollAnimation", false)
     @RenderSection("scripts", false)
 </body>
 </html>

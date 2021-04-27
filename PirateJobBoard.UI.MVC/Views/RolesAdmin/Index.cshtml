@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pirate User Roles";
 }
 
-<h2>Index</h2>
+<h2 class="text-center">@ViewBag.Title<span> <a href="@Url.Action("Create", "RolesAdmin")"><i class="fa fa-plus mx-2"></i></a></span></h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>

@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<PirateJobBoard.UI.MVC.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pirates (Users)";
 }
 
-<h2>Index</h2>
+<h2 class="text-center">@ViewBag.Title</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @*@Html.DisplayNameFor(model => model.UserName)*@
+            User Name
         </th>
         <th>
 

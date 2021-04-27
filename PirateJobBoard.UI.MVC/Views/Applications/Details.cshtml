@@ -4,7 +4,7 @@
     ViewBag.Title = "Application Details";
 }
 
-<h2 class="my-4"><em>@Model.PirateDetail.FullName's</em> @ViewBag.Title @if(!User.IsInRole("Crewmate"))
+<h2 class="my-4 text-center"><em>@Model.PirateDetail.FullName's</em> @ViewBag.Title @if(!User.IsInRole("Crewmate"))
 {
     <a href="@Url.Action("Edit", "Applications", new { id = Model.ApplicationID })"><i class="fa fa-edit mx-2"></i></a>
 }

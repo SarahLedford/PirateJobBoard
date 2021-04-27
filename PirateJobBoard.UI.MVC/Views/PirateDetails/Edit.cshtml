@@ -1,10 +1,10 @@
 ﻿@model PirateJobBoard.DATA.EF.PirateDetail
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Yer Details";
 }
 
-<h2>Edit</h2>
+<h2 class="text-center">@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Edit", "PirateDetails", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
@@ -58,6 +58,7 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div class="my-3">
+        <a href="@Url.Action("Index", "PirateDetails")" class="text-decoration-none"><i class="fa fa-arrow-left mx-2"></i> Go Back</a>
+
+    </div>

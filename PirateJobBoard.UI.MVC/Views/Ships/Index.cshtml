@@ -4,11 +4,8 @@
     ViewBag.Title = "Ships";
 }
 
-<h2 class="my-4">@ViewBag.Title</h2>
+<h2 class="my-4 text-center">@ViewBag.Title<span><a href="@Url.Action("Create", "Ships")"><i class="fa fa-plus mx-2"></i></a></span></h2>
 
-<h3>
-    <a href="@Url.Action("Create", "Ships")"><i class="fa fa-plus mx-2"></i></a>
-</h3>
 <table class="table table-hover text-center" id="ships">
     <thead>
         <tr>
@@ -19,7 +16,6 @@
                 @Html.DisplayNameFor(model => model.HomePort)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.PirateDetail.FirstName)*@
                 Captain
             </th>
             <th></th>

@@ -18,9 +18,21 @@
         @Html.AntiForgeryToken()
 
         <ul id="loginPartial" class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Ahoy there, " + pirateFN + "!", "Index", "PirateDetails", routeValues: null, htmlAttributes: new { title = "Manage", style = $"color: {color}", @class= "fw-bolder" })
-            </li>
+
+            @if (User.IsInRole("Crewmate"))
+            {
+                <li>
+
+                    @Html.ActionLink("Ahoy there, " + pirateFN + "!", "Index", "PirateDetails", routeValues: null, htmlAttributes: new { title = "Manage", style = $"color: {color}", @class = "fw-bolder" })
+                </li>
+            }
+            else
+            {
+                <li class = "fw-bolder" style ="color: @color;">
+                    Ahoy there, @pirateFN!
+                </li>
+            }
+            
             <li class="fw-bolder"><a id="loginHover" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
     }

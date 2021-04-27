@@ -1,13 +1,12 @@
 ﻿@model PirateJobBoard.UI.MVC.Models.ApplicationUser
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Pirate Details";
 }
 
-<h2>Details.</h2>
+<h2 class="text-center">@ViewBag.Title</h2>
 
 <div>
-    <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -18,11 +17,11 @@
         </dd>
     </dl>
 </div>
-<h4>List of roles for this user</h4>
+<h4>List of roles for this pirate</h4>
 @if (ViewBag.RoleNames.Count == 0)
 {
     <hr />
-    <p>No roles found for this user.</p>
+    <p>No roles found for this pirate</p>
 }
 
 <table class="table">

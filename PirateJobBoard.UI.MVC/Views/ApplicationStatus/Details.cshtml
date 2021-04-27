@@ -4,9 +4,8 @@
     ViewBag.Title = "Details";
 }
 
-<h2 class="my-4"><em>@Model.StatusName</em> @ViewBag.Title <a href="@Url.Action("Edit", "ApplicationStatus", new { id = Model.ApplicationStatusID })"><i class="fa fa-edit mx-2"></i></a></h2>
+<h2 class="my-4 text-center"><em>@Model.StatusName</em> @ViewBag.Title <a href="@Url.Action("Edit", "ApplicationStatus", new { id = Model.ApplicationStatusID })"><i class="fa fa-edit mx-2"></i></a></h2>
 <div>
-    <h4>ApplicationStatus</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

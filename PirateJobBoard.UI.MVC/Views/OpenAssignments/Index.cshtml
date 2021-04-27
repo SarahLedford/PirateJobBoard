@@ -62,18 +62,16 @@
                 }
                 else if (pirate.ResumeFilename != "" && User.IsInRole("Crewmate"))
                 {
-                    @Html.ActionLink("Apply!", "OneClickApply", new { id = item.OpenAssignmentID }, htmlAttributes: new { @class = "btn btn-success" })
+                    @Html.ActionLink("Apply!", "OneClickApply", new { id = item.OpenAssignmentID }, htmlAttributes: new { @class = "btn btn-success apply" })
                 }
                 <br />
-                @*@Html.ActionLink("Assignment Details", "Details", new { id = item.OpenAssignmentID })*@
                 <a href="@Url.Action("Details", "OpenAssignments", new { id = item.OpenAssignmentID })"><i class="fa fa-info mx-2"></i></a>
 
 
                 @if (!User.IsInRole("Crewmate"))
                 {
                     <a href="@Url.Action("Edit", "OpenAssignments", new { id = item.OpenAssignmentID })"><i class="fa fa-edit mx-2"></i></a>
-
-                    @*@Html.ActionLink("Delete", "Delete", new { id = item.OpenAssignmentID })*@
+                    
                     <a href="@Url.Action("Delete", "OpenAssignments", new { id = item.OpenAssignmentID })"><i class="fa fa-trash mx-2"></i></a>
 
                 }

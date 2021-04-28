@@ -515,6 +515,7 @@
     <Content Include="Content\assets\js\theme.js.map" />
     <Content Include="Content\assets\js\theme.min.js.map" />
     <Content Include="ConnectionStrings.config" />
+    <Content Include="Content\SarahLedfordDocumentation.pdf" />
     <None Include="packages.config" />
     <Content Include="Views\Applications\Details.cshtml" />
     <Content Include="Views\Applications\Edit.cshtml" />
